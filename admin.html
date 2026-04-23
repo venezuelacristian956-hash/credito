@@ -256,11 +256,15 @@ async function loadData() {
   const [sol, ase, con, ctas, pgs] = await Promise.all([
     sb.from('kreditplus_solicitudes').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
     sb.from('kreditplus_asesores').select('*').order('created_at',{ascending:false}),
-    sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false})
+    sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
+    sb.from('kreditplus_cuentas_pago').select('*').order('created_at',{ascending:false}),
+    sb.from('kreditplus_pagos').select('*').order('created_at',{ascending:false})
   ]);
   data.solicitudes = sol.data || [];
   data.asesores = ase.data || [];
   data.contactos = con.data || [];
+  data.cuentas = ctas.data || [];
+  data.pagos = pgs.data || [];
   
   // Populate filter
   const sel = document.getElementById('filter-asesor');
@@ -328,6 +332,50 @@ function render() {
           <td><span class="badge badge-asignado">${count}</span></td>
         </tr>`;
       }).join('')}</tbody></table>`;
+  }
+  else if (currentTab === 'contactos') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Fecha</th><th>Nombre</th><th>Email</th><th>Mensaje</th></tr></thead>
+      <tbody>${list.map(r=>`<tr>
+        <td>${new Date(r.created_at).toLocaleDateString()}</td>
+        <td><strong>${r.nombre}</strong><br><small>${r.celular||''}</small></td>
+        <td>${r.email||'-'}</td>
+        <td style="max-width:300px;white-space:normal;">${r.mensaje}</td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+  else if (currentTab === 'cuentas') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Banco</th><th>Tipo</th><th>Número</th><th>Titular</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>${list.map(r=>`<tr>
+        <td><strong>${r.banco}</strong></td>
+        <td>${r.tipo_cuenta}</td>
+        <td>${r.numero_cuenta}</td>
+        <td>${r.titular}</td>
+        <td>
+          <label class="toggle-switch">
+            <input type="checkbox" ${r.activo ? 'checked' : ''} onchange="toggleCuenta('${r.id}', this.checked)">
+            <span class="slider"></span>
+          </label>
+        </td>
+        <td><span style="color:${r.activo?'#15803d':'#b91c1c'}">${r.activo?'Activa':'Inactiva'}</span></td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+  else if (currentTab === 'pagos') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Fecha</th><th>Cédula</th><th>Monto</th><th>Comprobante</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>${list.map(r=>`<tr>
+        <td>${new Date(r.created_at).toLocaleDateString()}</td>
+        <td><strong>${r.cedula}</strong></td>
+        <td>$ ${parseInt(r.monto).toLocaleString('es-CO')}</td>
+        <td><a href="${r.comprobante_url}" target="_blank" style="color:#31cde4;text-decoration:underline;">Ver Imagen</a></td>
+        <td><span class="badge badge-${r.estado}">${r.estado}</span></td>
+        <td>
+          ${r.estado === 'pendiente' ? `
+            <button class="btn-outline" style="border-color:#15803d;color:#15803d;padding:4px 8px;font-size:0.75rem;" onclick="updatePago('${r.id}', 'verificado')">✔ Verificar</button>
+            <button class="btn-outline" style="border-color:#b91c1c;color:#b91c1c;padding:4px 8px;font-size:0.75rem;" onclick="updatePago('${r.id}', 'rechazado')">✖ Rechazar</button>
+          ` : `<span style="font-size:0.8rem;color:#94a3b8;">Sin acciones</span>`}
+        </td>
+      </tr>`).join('')}</tbody></table>`;
   }
 }
 
