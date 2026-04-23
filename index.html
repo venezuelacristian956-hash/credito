@@ -4654,7 +4654,10 @@
 											</div>
 										</div>
 									
-					<!-- SERVICIOS RÁPIDOS KreditPlus -->
+					
+</section>
+									
+<!-- SERVICIOS RÁPIDOS KreditPlus -->
 					<div class="kpsm-quick-grid">
 					  <button class="kpsm-quick-btn" data-service-modal="modal-pagar">
 					    <span class="kpsm-quick-icon">&#128179;</span>
@@ -4673,8 +4676,8 @@
 					    <span>Verificar asesor</span>
 					  </button>
 					</div>
-</section>
-									<section
+
+<section
 										class="elementor-section elementor-top-section elementor-element elementor-element-533b61e elementor-section-boxed elementor-section-height-default elementor-section-height-default"
 										data-id="533b61e" data-element_type="section" data-e-type="section"
 										data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -7867,34 +7870,39 @@
 /* ═══ SERVICIOS RÁPIDOS KREDITPLUS ═══ */
 .kpsm-quick-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4,1fr);
   gap: 10px;
-  margin: 16px auto 0;
-  max-width: 380px;
+  margin: 24px auto;
+  max-width: 720px;
+  padding: 0 16px;
 }
 .kpsm-quick-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 13px 10px;
+  gap: 7px;
+  padding: 15px 10px;
   border-radius: 16px;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
+  border: 1.5px solid rgba(11,71,136,0.12);
+  background: #fff;
+  color: #0b4788;
+  font-size: 0.78rem;
+  font-weight: 700;
   cursor: pointer;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(11,71,136,0.08);
   transition: all 0.2s;
   letter-spacing: 0.01em;
 }
 .kpsm-quick-btn:hover {
-  background: rgba(255,255,255,0.22);
-  border-color: rgba(255,255,255,0.55);
-  transform: translateY(-2px);
+  background: #f0feff;
+  border-color: #31cde4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(49,205,228,0.18);
 }
-.kpsm-quick-icon { font-size: 1.4rem; line-height: 1; }
+.kpsm-quick-icon { font-size: 1.5rem; line-height: 1; }
+@media (max-width: 640px) {
+  .kpsm-quick-grid { grid-template-columns: repeat(2,1fr); }
+}
 
 /* ═══ KPSM MODAL CONTENT STYLES ═══ */
 .kpsm-result  { margin-top: 4px; }
