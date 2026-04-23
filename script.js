@@ -1,4 +1,4 @@
-﻿// KreditPlus — script principal
+// KreditPlus — script principal
 // Supabase se inicializa desde supabase-client.js (cargado antes de este script)
 
 const currency = new Intl.NumberFormat("es-CO", {
@@ -203,7 +203,8 @@ function animateCounter(node) {
 function setupModal() {
   const modal = document.querySelector("[data-modal]");
   const overlay = modal?.querySelector("[data-modal-overlay]");
-  const close = modal?.querySelector("[data-modal-close]");
+  // Capturar TODOS los botones de cierre (header × y success screen)
+  const closeButtons = modal?.querySelectorAll("[data-modal-close]");
 
   if (!modal) {
     return;
@@ -215,6 +216,13 @@ function setupModal() {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    // Restaurar formulario si vuelven a abrir
+    const form = modal.querySelector("[data-quick-form]");
+    const successScreen = modal.querySelector("[data-success-screen]");
+    const btn = form?.querySelector("button[type='submit']");
+    if (form) { form.style.display = ""; form.reset(); }
+    if (successScreen) successScreen.style.display = "none";
+    if (btn) { btn.disabled = false; btn.innerHTML = "Enviar solicitud &rarr;"; }
   }
 
   function closeModal() {
@@ -227,7 +235,8 @@ function setupModal() {
     button.addEventListener("click", openModal);
   });
 
-  close?.addEventListener("click", closeModal);
+  // Listener en todos los botones de cierre
+  closeButtons?.forEach((btn) => btn.addEventListener("click", closeModal));
   overlay?.addEventListener("click", closeModal);
 
   document.addEventListener("keydown", (event) => {
