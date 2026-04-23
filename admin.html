@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -147,26 +147,29 @@ tr:hover td{background:rgba(255,255,255,.02)}
   </div>
 </div>
 
-  <!-- Modal Cuenta de Pago -->
+    <!-- Modal Cuenta de Pago -->
   <div class="modal-backdrop" id="modal-cuenta">
     <div class="modal">
-      <h3>Nueva Cuenta de Pago</h3>
+      <div class="modal-header">
+        <div class="modal-title">Nueva Cuenta de Pago</div>
+        <button class="modal-close" onclick="document.getElementById('modal-cuenta').style.display='none'">×</button>
+      </div>
       <form id="form-cuenta" onsubmit="saveCuenta(event)">
-        <div class="input-group">
+        <div class="form-group">
           <label>Banco / Billetera (Ej. Bancolombia, Nequi)</label>
-          <input type="text" id="cta-banco" required>
+          <input type="text" id="cta-banco" class="form-input" required>
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Tipo de Cuenta (Ahorros, Corriente, N/A)</label>
-          <input type="text" id="cta-tipo" required>
+          <input type="text" id="cta-tipo" class="form-input" required>
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Número de Cuenta / Celular</label>
-          <input type="text" id="cta-numero" required>
+          <input type="text" id="cta-numero" class="form-input" required>
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label>Nombre del Titular</label>
-          <input type="text" id="cta-titular" required>
+          <input type="text" id="cta-titular" class="form-input" required>
         </div>
         <div style="display:flex;gap:10px;margin-top:20px;">
           <button type="button" class="btn-outline" onclick="document.getElementById('modal-cuenta').style.display='none'">Cancelar</button>
