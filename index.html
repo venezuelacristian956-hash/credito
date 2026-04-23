@@ -81,76 +81,67 @@
   </header>
 
   <main>
-    <section class="hero hero--photo">
-      <div class="container hero__split">
+    <!-- ═══════ HERO GRADIENT (estilo Crezcamos) ═══════ -->
+    <section class="hero hero--gradient">
+      <div class="container hero__flex">
 
         <!-- LEFT: copy -->
-        <div class="hero__copy reveal">
-          <p class="eyebrow">Cr&eacute;dito digital en Colombia</p>
-          <h1 class="hero__title">Pr&eacute;stamo<br>digital para<br>progresar.</h1>
-          <p class="hero__lead">
-            &iquest;Tienes un negocio, eres empleado o independiente? Solicita tu cr&eacute;dito
-            en l&iacute;nea, &uacute;salo para crecer y avanzar hacia tus metas.
+        <div class="hero__copy-g reveal">
+          <div class="hero__eyebrow-g">Crédito digital en Colombia</div>
+          <h1 class="hero__title-g">
+            Préstamos<br>fáciles y<br><span>rápidos</span>
+          </h1>
+          <p class="hero__sub-g">
+            Llévate hoy el préstamo de dinero que necesitas y recíbelo en el banco de tu preferencia. Sin filas, 100% en línea, respuesta en 24 horas.
           </p>
-          <div class="hero__actions">
-            <button class="button" type="button" data-modal-open>Pide aqu&iacute; tu cr&eacute;dito</button>
-            <a class="button-ghost" href="simuladores.html">Simula tu cuota</a>
-          </div>
-
-          <div class="hero__trust">
-            <span class="trust-badge"><span class="trust-badge__dot"></span>+82.000 clientes</span>
-            <span class="trust-badge"><span class="trust-badge__dot"></span>Respuesta en 24 hrs</span>
-            <span class="trust-badge"><span class="trust-badge__dot"></span>100% en l&iacute;nea</span>
+          <button class="btn-hero-g" type="button" data-modal-open>
+            ¡Solicitar mi crédito! &rarr;
+          </button>
+          <div class="hero__trust-g">
+            <span class="trust-pill">Sin filas</span>
+            <span class="trust-pill">100% en línea</span>
+            <span class="trust-pill">Respuesta en 24h</span>
+            <span class="trust-pill">+82.000 clientes</span>
           </div>
         </div>
 
-        <!-- RIGHT: photo collage -->
-        <div class="hero__photos" aria-hidden="true">
-          <div class="photo-grid">
-            <div class="photo-grid__main">
-              <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop&crop=face"
-                alt="Empresaria colombiana sonriendo"
-                loading="eager"
-                width="600" height="720"
-              >
-            </div>
-            <div class="photo-grid__side">
-              <div class="photo-grid__top">
-                <img
-                  src="https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=320&q=75&auto=format&fit=crop"
-                  alt="Microempresario con tablet"
-                  loading="eager"
-                  width="320" height="220"
-                >
-                <div class="photo-badge">
-                  <span class="photo-badge__check">&#10003;</span>
-                  <div>
-                    <strong>Aprobado</strong>
-                    <small>en 24 horas</small>
-                  </div>
-                </div>
-              </div>
-              <div class="photo-grid__bottom">
-                <img
-                  src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=320&q=75&auto=format&fit=crop"
-                  alt="Familia agroempresaria"
-                  loading="lazy"
-                  width="320" height="220"
-                >
-              </div>
-            </div>
+        <!-- RIGHT: person + floating badges -->
+        <div class="hero__visual-g" aria-hidden="true">
+          <img
+            class="hero__person-img"
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=560&q=80&auto=format&fit=crop&crop=top"
+            alt="Profesional KreditPlus"
+            loading="eager"
+            width="480" height="560"
+          >
+          <div class="float-badge float-badge--1">
+            <span class="float-badge__icon">💰</span> Hasta $25.000.000
           </div>
-          <div class="photo-stat-float">
-            <strong>+82K</strong>
-            <span>colombianos<br>confian en nosotros</span>
+          <div class="float-badge float-badge--2">
+            <span class="float-badge__icon">⚡</span> Aprobación rápida
+          </div>
+          <div class="float-badge float-badge--3">
+            <span class="float-badge__icon">🏦</span> A tu banco favorito
+          </div>
+          <div class="float-badge float-badge--4">
+            <span class="float-badge__icon">📱</span> 100% en línea
           </div>
         </div>
 
       </div>
 
+      <!-- Info / Amount card -->
+      <div class="container">
+        <div class="hero-amount-card reveal">
+          <p>Montos desde <strong>$500.000</strong> hasta <strong>$25.000.000</strong> para tus préstamos rápidos &nbsp;<small style="color:#94a3b8">*Aplican condiciones del producto</small></p>
+          <button class="btn-hero-g" type="button" data-modal-open style="padding:13px 26px;font-size:0.95rem;min-width:200px">
+            ¡Iniciar desembolso!
+          </button>
+        </div>
+      </div>
+
       <!-- Segment cards -->
-      <div class="container hero__segments">
+      <div class="container hero__segments" style="margin-top:48px">
         <a class="seg-card reveal" href="soluciones.html#empleados">
           <span class="seg-card__icon" aria-hidden="true">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
@@ -160,9 +151,9 @@
           </span>
           <div>
             <strong>Soy Empleado</strong>
-            <span>o pensionado sector p&uacute;blico o privado</span>
+            <span>o pensionado sector público o privado</span>
           </div>
-          <span class="seg-card__arrow">&#8594;</span>
+          <span class="seg-card__arrow">→</span>
         </a>
         <a class="seg-card reveal" href="soluciones.html#independientes">
           <span class="seg-card__icon" aria-hidden="true">
@@ -175,7 +166,7 @@
             <strong>Soy Independiente</strong>
             <span>o microempresario</span>
           </div>
-          <span class="seg-card__arrow">&#8594;</span>
+          <span class="seg-card__arrow">→</span>
         </a>
         <a class="seg-card reveal" href="soluciones.html#capital-productivo">
           <span class="seg-card__icon" aria-hidden="true">
@@ -188,7 +179,7 @@
             <strong>Tengo un Negocio</strong>
             <span>capital productivo para crecer</span>
           </div>
-          <span class="seg-card__arrow">&#8594;</span>
+          <span class="seg-card__arrow">→</span>
         </a>
         <a class="seg-card reveal" href="soluciones.html#portafolio">
           <span class="seg-card__icon" aria-hidden="true">
@@ -201,50 +192,8 @@
             <strong>Compra de Cartera</strong>
             <span>unifica tus pagos y ahorra</span>
           </div>
-          <span class="seg-card__arrow">&#8594;</span>
+          <span class="seg-card__arrow">→</span>
         </a>
-      </div>
-    </section>
-
-    <section class="section section--compact">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Así funciona</p>
-          <h2>Una ruta clara, simple y sin fricciones.</h2>
-          <p>
-            En KreditPlus cada paso esta disenado para que obtengas tu credito de forma rapida, transparente y sin complicaciones.
-          </p>
-        </div>
-
-        <div class="quick-grid">
-          <article class="quick-card reveal">
-            <span class="quick-card__number">01</span>
-            <h3>Simula y compara</h3>
-            <p>Explora montos, plazos y escenarios de cuota desde el home o la página de simuladores.</p>
-            <button type="button" data-modal-open>Ver detalle</button>
-          </article>
-
-          <article class="quick-card reveal">
-            <span class="quick-card__number">02</span>
-            <h3>Déjanos tu perfil</h3>
-            <p>Capturamos datos mínimos para orientar el producto correcto y reducir abandono.</p>
-            <button type="button" data-modal-open>Ver detalle</button>
-          </article>
-
-          <article class="quick-card reveal">
-            <span class="quick-card__number">03</span>
-            <h3>Recibe una ruta sugerida</h3>
-            <p>La UI puede devolver recomendaciones, requisitos y próximos pasos según tu caso.</p>
-            <button type="button" data-modal-open>Ver detalle</button>
-          </article>
-
-          <article class="quick-card reveal">
-            <span class="quick-card__number">04</span>
-            <h3>Continúa por canal preferido</h3>
-            <p>Web, asesoría remota, oficina o seguimiento por servicio al cliente.</p>
-            <button type="button" data-modal-open>Ver detalle</button>
-          </article>
-        </div>
       </div>
     </section>
 
