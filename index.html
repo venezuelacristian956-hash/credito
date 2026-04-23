@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -93,9 +93,10 @@
             en l&iacute;nea, &uacute;salo para crecer y avanzar hacia tus metas.
           </p>
           <div class="hero__actions">
-            <a class="button" href="contacto.html">Pide aqu&iacute; tu cr&eacute;dito</a>
+            <button class="button" type="button" data-modal-open>Pide aqu&iacute; tu cr&eacute;dito</button>
             <a class="button-ghost" href="simuladores.html">Simula tu cuota</a>
           </div>
+
           <div class="hero__trust">
             <span class="trust-badge"><span class="trust-badge__dot"></span>+82.000 clientes</span>
             <span class="trust-badge"><span class="trust-badge__dot"></span>Respuesta en 24 hrs</span>
@@ -892,42 +893,65 @@
     </div>
   </footer>
 
+    <!-- Modal Solicitud de Crédito -->
   <div class="modal" data-modal data-modal-overlay aria-hidden="true">
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal__header">
         <div>
-          <p class="eyebrow">Proceso</p>
-          <h2 id="modal-title">Ruta sugerida para tu originación digital</h2>
+          <p class="eyebrow">Solicitud rápida</p>
+          <h2 id="modal-title">Cuéntanos sobre tu crédito</h2>
         </div>
-        <button class="modal__close" type="button" data-modal-close aria-label="Cerrar">Ã—</button>
+        <button class="modal__close" type="button" data-modal-close aria-label="Cerrar">&times;</button>
       </div>
-
       <div class="modal__body">
-        <article class="quick-card">
-          <span class="quick-card__number">1</span>
-          <h3>Descubrimiento</h3>
-          <p>Hero potente, CTA directo, simuladores visibles y bloques de segmentación para elegir el producto correcto.</p>
-        </article>
-        <article class="quick-card">
-          <span class="quick-card__number">2</span>
-          <h3>Calificación</h3>
-          <p>Formulario corto y modular, con posibilidad de integrarse luego con scoring, CRM o validación documental.</p>
-        </article>
-        <article class="quick-card">
-          <span class="quick-card__number">3</span>
-          <h3>Acompañamiento</h3>
-          <p>Servicio al cliente y oficinas no como anexos, sino como parte del journey principal.</p>
-        </article>
-        <article class="quick-card">
-          <span class="quick-card__number">4</span>
-          <h3>Retención</h3>
-          <p>Bloques editoriales, sostenibilidad y contenidos para construir relación de largo plazo y mejorar SEO.</p>
-        </article>
+        <form class="quick-form" data-quick-form novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="q-tipo">¿Qué tipo de crédito buscas?</label>
+              <select id="q-tipo" name="tipo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Crédito personal">Crédito personal</option>
+                <option value="Capital para negocio">Capital para negocio</option>
+                <option value="Compra de cartera">Compra de cartera</option>
+                <option value="Empleado / Pensionado">Empleado / Pensionado</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="q-monto">¿Cuánto necesitas?</label>
+              <select id="q-monto" name="monto" required>
+                <option value="">Selecciona un rango</option>
+                <option value="Hasta $2.000.000">Hasta $2.000.000</option>
+                <option value="$2M – $5M">$2M – $5M</option>
+                <option value="$5M – $12M">$5M – $12M</option>
+                <option value="$12M – $25M">$12M – $25M</option>
+                <option value="Más de $25M">Más de $25M</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="q-nombre">Nombre completo</label>
+              <input id="q-nombre" name="nombre" type="text" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="field">
+              <label for="q-celular">Celular</label>
+              <input id="q-celular" name="celular" type="tel" placeholder="300 123 4567" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="q-ciudad">Ciudad</label>
+            <input id="q-ciudad" name="ciudad" type="text" placeholder="Bogotá, Medellín, Cali..." required>
+          </div>
+          <button class="button" type="submit" style="width:100%;margin-top:8px">Quiero avanzar &rarr;</button>
+          <p class="small-chip" data-form-feedback style="display:none;margin-top:12px;width:100%;justify-content:center"></p>
+        </form>
+        <p style="font-size:0.82rem;color:rgba(239,250,255,0.5);margin-top:14px;text-align:center">
+          Un asesor te contactará en menos de 24 horas hábiles. Tus datos están protegidos.
+        </p>
       </div>
     </div>
   </div>
-
-  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="supabase-client.js"></script>
   <script src="notificaciones.js"></script>
