@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KreditPlus | Soluciones financieras digitales</title>
+  <meta
+    name="description"
+    content="KreditPlus &mdash; Cr&eacute;dito digital en Colombia. Solicita tu cr&eacute;dito personal o empresarial de forma r&aacute;pida, segura y sin complicaciones. Respuesta en 24 horas."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+  <div class="utility-bar">
+    <div class="container utility-bar__content">
+      <p>Atención nacional, soluciones digitales y red física para acompañar cada momento financiero.</p>
+      <a class="utility-bar__cta" href="contacto.html">Canales de servicio y PQRS</a>
+    </div>
+  </div>
+
+  <header class="site-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Inicio KreditPlus">
+        <span class="brand__mark">K</span>
+        <span class="brand__text">
+          KreditPlus
+          <small>Cr&eacute;dito digital en Colombia</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-primary-nav aria-label="Principal">
+        <a href="index.html" aria-current="page">Inicio</a>
+
+        <details class="nav-dropdown">
+          <summary>Nosotros</summary>
+          <div class="nav-dropdown__menu">
+            <a href="nosotros.html#historia">Quiénes somos</a>
+            <a href="nosotros.html#indicadores">Indicadores</a>
+            <a href="nosotros.html#talento">Talento</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Soluciones</summary>
+          <div class="nav-dropdown__menu">
+            <a href="soluciones.html#credito-digital">Crédito digital</a>
+            <a href="soluciones.html#portafolio">Portafolio</a>
+            <a href="simuladores.html">Simuladores</a>
+          </div>
+        </details>
+
+        <a href="oficinas.html">Oficinas</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="button-secondary" href="contacto.html">Quiero mi crédito</a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="menu-principal"
+          data-menu-toggle
+        >
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--photo">
+      <div class="container hero__split">
+
+        <!-- LEFT: copy -->
+        <div class="hero__copy reveal">
+          <p class="eyebrow">Cr&eacute;dito digital en Colombia</p>
+          <h1 class="hero__title">Pr&eacute;stamo<br>digital para<br>progresar.</h1>
+          <p class="hero__lead">
+            &iquest;Tienes un negocio, eres empleado o independiente? Solicita tu cr&eacute;dito
+            en l&iacute;nea, &uacute;salo para crecer y avanzar hacia tus metas.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="contacto.html">Pide aqu&iacute; tu cr&eacute;dito</a>
+            <a class="button-ghost" href="simuladores.html">Simula tu cuota</a>
+          </div>
+          <div class="hero__trust">
+            <span class="trust-badge"><span class="trust-badge__dot"></span>+82.000 clientes</span>
+            <span class="trust-badge"><span class="trust-badge__dot"></span>Respuesta en 24 hrs</span>
+            <span class="trust-badge"><span class="trust-badge__dot"></span>100% en l&iacute;nea</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: photo collage -->
+        <div class="hero__photos" aria-hidden="true">
+          <div class="photo-grid">
+            <div class="photo-grid__main">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop&crop=face"
+                alt="Empresaria colombiana sonriendo"
+                loading="eager"
+                width="600" height="720"
+              >
+            </div>
+            <div class="photo-grid__side">
+              <div class="photo-grid__top">
+                <img
+                  src="https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=320&q=75&auto=format&fit=crop"
+                  alt="Microempresario con tablet"
+                  loading="eager"
+                  width="320" height="220"
+                >
+                <div class="photo-badge">
+                  <span class="photo-badge__check">&#10003;</span>
+                  <div>
+                    <strong>Aprobado</strong>
+                    <small>en 24 horas</small>
+                  </div>
+                </div>
+              </div>
+              <div class="photo-grid__bottom">
+                <img
+                  src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=320&q=75&auto=format&fit=crop"
+                  alt="Familia agroempresaria"
+                  loading="lazy"
+                  width="320" height="220"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="photo-stat-float">
+            <strong>+82K</strong>
+            <span>colombianos<br>confian en nosotros</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Segment cards -->
+      <div class="container hero__segments">
+        <a class="seg-card reveal" href="soluciones.html#empleados">
+          <span class="seg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect width="40" height="40" rx="12" fill="#e8fcff"/>
+              <path d="M20 10a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm-9 20c0-5 4-8 9-8s9 3 9 8H11z" fill="#0b4788"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Soy Empleado</strong>
+            <span>o pensionado sector p&uacute;blico o privado</span>
+          </div>
+          <span class="seg-card__arrow">&#8594;</span>
+        </a>
+        <a class="seg-card reveal" href="soluciones.html#independientes">
+          <span class="seg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect width="40" height="40" rx="12" fill="#e8fcff"/>
+              <path d="M10 28V16l10-6 10 6v12H10zm7-4h6v-5h-6v5z" fill="#0b4788"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Soy Independiente</strong>
+            <span>o microempresario</span>
+          </div>
+          <span class="seg-card__arrow">&#8594;</span>
+        </a>
+        <a class="seg-card reveal" href="soluciones.html#capital-productivo">
+          <span class="seg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect width="40" height="40" rx="12" fill="#e8fcff"/>
+              <path d="M8 30V14h8v16H8zm8-10h8v10h-8V20zm8-6h8v16h-8V14z" fill="#0b4788"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Tengo un Negocio</strong>
+            <span>capital productivo para crecer</span>
+          </div>
+          <span class="seg-card__arrow">&#8594;</span>
+        </a>
+        <a class="seg-card reveal" href="soluciones.html#portafolio">
+          <span class="seg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect width="40" height="40" rx="12" fill="#e8fcff"/>
+              <path d="M20 8c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12S26.6 8 20 8zm1 17h-2v-2h2v2zm0-4h-2v-8h2v8z" fill="#0b4788"/>
+            </svg>
+          </span>
+          <div>
+            <strong>Compra de Cartera</strong>
+            <span>unifica tus pagos y ahorra</span>
+          </div>
+          <span class="seg-card__arrow">&#8594;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Así funciona</p>
+          <h2>Una ruta clara, simple y sin fricciones.</h2>
+          <p>
+            En KreditPlus cada paso esta disenado para que obtengas tu credito de forma rapida, transparente y sin complicaciones.
+          </p>
+        </div>
+
+        <div class="quick-grid">
+          <article class="quick-card reveal">
+            <span class="quick-card__number">01</span>
+            <h3>Simula y compara</h3>
+            <p>Explora montos, plazos y escenarios de cuota desde el home o la página de simuladores.</p>
+            <button type="button" data-modal-open>Ver detalle</button>
+          </article>
+
+          <article class="quick-card reveal">
+            <span class="quick-card__number">02</span>
+            <h3>Déjanos tu perfil</h3>
+            <p>Capturamos datos mínimos para orientar el producto correcto y reducir abandono.</p>
+            <button type="button" data-modal-open>Ver detalle</button>
+          </article>
+
+          <article class="quick-card reveal">
+            <span class="quick-card__number">03</span>
+            <h3>Recibe una ruta sugerida</h3>
+            <p>La UI puede devolver recomendaciones, requisitos y próximos pasos según tu caso.</p>
+            <button type="button" data-modal-open>Ver detalle</button>
+          </article>
+
+          <article class="quick-card reveal">
+            <span class="quick-card__number">04</span>
+            <h3>Continúa por canal preferido</h3>
+            <p>Web, asesoría remota, oficina o seguimiento por servicio al cliente.</p>
+            <button type="button" data-modal-open>Ver detalle</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Segmentos</p>
+          <h2>Soluciones pensadas para cada momento de crecimiento.</h2>
+          <p>Productos pensados para cada etapa de tu vida financiera.</p>
+        </div>
+
+        <div class="segments-grid">
+          <article class="segment-card reveal">
+            <span class="card-icon">A</span>
+            <h3>Avanza</h3>
+            <p>Crédito digital de libre destino para resolver necesidades inmediatas o reorganizar tus finanzas.</p>
+            <ul>
+              <li>Solicitud rápida desde celular</li>
+              <li>Cuotas flexibles y acompañamiento</li>
+              <li>Onboarding claro y guiado</li>
+            </ul>
+          </article>
+
+          <article class="segment-card reveal">
+            <span class="card-icon">E</span>
+            <h3>Emprende</h3>
+            <p>Capital productivo para negocio, inventario, punto de venta y expansión comercial.</p>
+            <ul>
+              <li>Montos escalables según perfil</li>
+              <li>Seguimiento por asesor o canal remoto</li>
+              <li>Visibilidad del estado de solicitud</li>
+            </ul>
+          </article>
+
+          <article class="segment-card reveal">
+            <span class="card-icon">P</span>
+            <h3>Protege</h3>
+            <p>Ahorro, respaldo y coberturas para construir una relación financiera de largo plazo.</p>
+            <ul>
+              <li>Seguros voluntarios y asistencia</li>
+              <li>Metas de ahorro programado</li>
+              <li>Contenidos y educación financiera</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Historias</p>
+          <h2>Casos destacados del portafolio.</h2>
+          <p>Mas de 82.000 colombianos confian en KreditPlus.</p>
+        </div>
+
+        <div class="slider reveal" data-slider data-autoplay="5200">
+          <div class="slider__viewport">
+            <div class="slider__track" data-slider-track>
+              <article class="slide">
+                <div class="story-card">
+                  <span class="pill">Crédito personal</span>
+                  <strong class="story-card__quote">"En una sola ruta pude simular, entender mi cuota y avanzar sin sentirme perdido."</strong>
+                  <p>En KreditPlus el proceso es claro: desde la simulacion hasta el desembolso, siempre supe que iba a pasar.</p>
+                  <div class="story-card__meta">
+                    <span class="pill">Desembolso digital</span>
+                    <span class="pill">Seguimiento móvil</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="story-card">
+                  <span class="pill">Negocio</span>
+                  <strong class="story-card__quote">"La sección de productos me ayudó a escoger entre capital de trabajo y expansión."</strong>
+                  <p>Gracias al credito para negocio pude renovar mi inventario y aumentar mis ventas en un 40%.</p>
+                  <div class="story-card__meta">
+                    <span class="pill">Capital productivo</span>
+                    <span class="pill">Atención híbrida</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="story-card">
+                  <span class="pill">Ahorro</span>
+                  <strong class="story-card__quote">"Ahora tengo una experiencia coherente: ahorro, seguros y crédito desde el mismo ecosistema."</strong>
+                  <p>Tenia deudas en tres entidades. Con KreditPlus unifique todo y ahora pago menos cada mes.</p>
+                  <div class="story-card__meta">
+                    <span class="pill">Metas programadas</span>
+                    <span class="pill">Educación financiera</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="story-card">
+                  <span class="pill">Servicio</span>
+                  <strong class="story-card__quote">"No tuve que buscar dónde escribir: el servicio al cliente está integrado dentro de la navegación."</strong>
+                  <p>Hice todo desde el celular. En 20 minutos tenia la respuesta y en 2 dias el dinero en mi cuenta.</p>
+                  <div class="story-card__meta">
+                    <span class="pill">Oficinas</span>
+                    <span class="pill">PQRS</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="slider__controls">
+            <div class="slider__dots" data-slider-dots></div>
+            <div class="slider__buttons">
+              <button class="slider__button" type="button" data-slider-prev aria-label="Anterior">â†</button>
+              <button class="slider__button" type="button" data-slider-next aria-label="Siguiente">â†’</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Portafolio</p>
+          <h2>Nuestro portafolio de productos financieros.</h2>
+          <p>Encuentra el producto que se adapta a tus necesidades.</p>
+        </div>
+
+        <div class="slider reveal" data-slider data-autoplay="4400">
+          <div class="slider__viewport">
+            <div class="slider__track" data-slider-track>
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Crédito digital</span>
+                  <h3>Libre destino</h3>
+                  <p>Para necesidades inmediatas, reorganización financiera o proyectos personales con acompañamiento remoto.</p>
+                  <div class="product-card__price">Hasta $12M</div>
+                  <ul class="simple-list">
+                    <li>Solicitud desde cualquier dispositivo</li>
+                    <li>Ruta clara de aprobación</li>
+                    <li>Plazos flexibles</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="soluciones.html#credito-digital">Ver línea</a>
+                    <span class="pill">Popular</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Impulso negocio</span>
+                  <h3>Capital productivo</h3>
+                  <p>Ideal para inventario, compra de insumos, equipos y pequeñas expansiones comerciales.</p>
+                  <div class="product-card__price">Hasta $25M</div>
+                  <ul class="simple-list">
+                    <li>Evaluación orientada a operación real</li>
+                    <li>Acompañamiento por asesor</li>
+                    <li>Canal presencial o remoto</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="soluciones.html#capital-productivo">Ver línea</a>
+                    <span class="pill">Empresas</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Ahorro</span>
+                  <h3>Meta programada</h3>
+                  <p>Construye hábitos de ahorro con metas, plazos y seguimiento visual desde una interfaz simple.</p>
+                  <div class="product-card__price">Desde $50K</div>
+                  <ul class="simple-list">
+                    <li>Objetivos mensuales</li>
+                    <li>Estimador de aportes</li>
+                    <li>Alertas de avance</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="simuladores.html#ahorro">Simular</a>
+                    <span class="pill">Digital</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Protección</span>
+                  <h3>Seguros y asistencias</h3>
+                  <p>Complementos para el crédito y la vida diaria con explicaciones claras y cobertura visible.</p>
+                  <div class="product-card__price">Flexible</div>
+                  <ul class="simple-list">
+                    <li>Hogar, vida y negocio</li>
+                    <li>Activación guiada</li>
+                    <li>Beneficios por canal</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="soluciones.html#proteccion">Ver cobertura</a>
+                    <span class="pill">Respaldo</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Compra de cartera</span>
+                  <h3>Unifica tus pagos</h3>
+                  <p>Centraliza obligaciones en una nueva cuota estimada con acompañamiento durante la transición.</p>
+                  <div class="product-card__price">Según perfil</div>
+                  <ul class="simple-list">
+                    <li>Comparación de escenarios</li>
+                    <li>Ruta documental clara</li>
+                    <li>Atención omnicanal</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="soluciones.html#cartera">Ver línea</a>
+                    <span class="pill">Orden financiero</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="product-card">
+                  <span class="pill">Inversión</span>
+                  <h3>Rendimiento programado</h3>
+                  <p>Diseñado como una línea visible dentro del home para dar profundidad al Para todos los colombianos.</p>
+                  <div class="product-card__price">Plazos fijos</div>
+                  <ul class="simple-list">
+                    <li>Comparador por plazo</li>
+                    <li>Mensajes claros de rentabilidad</li>
+                    <li>CTA directo a simulación</li>
+                  </ul>
+                  <div class="product-card__footer">
+                    <a class="button-ghost" href="simuladores.html#rendimiento">Simular</a>
+                    <span class="pill">Ahorro</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="slider__controls">
+            <div class="slider__dots" data-slider-dots></div>
+            <div class="slider__buttons">
+              <button class="slider__button" type="button" data-slider-prev aria-label="Anterior">â†</button>
+              <button class="slider__button" type="button" data-slider-next aria-label="Siguiente">â†’</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Respaldo</p>
+          <h2>Confianza, tecnología y servicio visible.</h2>
+          <p>Tu tranquilidad es nuestra prioridad. Operamos bajo los mas altos estandares de seguridad.</p>
+        </div>
+
+        <div class="trust-grid">
+          <article class="recognition-card reveal">
+            <span class="card-icon">9.8</span>
+            <div class="recognition-score">9.8 <small>/10</small></div>
+            <h3>Satisfacción del cliente</h3>
+            <p>Nuestros clientes nos califican con 9.8/10. Calidad de servicio certificada por encuestas independientes.</p>
+          </article>
+
+          <article class="recognition-card reveal">
+            <span class="card-icon">24h</span>
+            <div class="recognition-score">24/7</div>
+            <h3>Disponibilidad digital</h3>
+            <p>Plataforma disponible las 24 horas, los 7 días de la semana. Solicita cuando quieras, donde quieras.</p>
+          </article>
+
+          <article class="recognition-card reveal">
+            <span class="card-icon">SSL</span>
+            <div class="recognition-score">256<small>bit</small></div>
+            <h3>Seguridad bancaria</h3>
+            <p>Cifrado SSL de 256 bits, habeas data y protocolos de seguridad de nivel bancario en cada operación.</p>
+          </article>
+
+          <article class="recognition-card reveal">
+            <span class="card-icon">SFC</span>
+            <div class="recognition-score">Vig.</div>
+            <h3>Vigilado Superfinanciera</h3>
+            <p>Operamos bajo la supervisión de la Superintendencia Financiera de Colombia. Tu dinero y datos seguros.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALIADOS -->
+    <section class="section section--compact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Aliados estratégicos</p>
+          <h2>Integrado con las entidades financieras de Colombia</h2>
+          <p>Trabajamos con los principales bancos, billeteras digitales y redes de pago del país para garantizar desembolsos rápidos y pagos convenientes.</p>
+        </div>
+        <div class="partners-grid reveal">
+          <div class="partner-card">
+            <img src="logos/bancolombia.svg" alt="Bancolombia" class="partner-logo" loading="lazy">
+            <strong>Bancolombia</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/nequi.svg" alt="Nequi" class="partner-logo" loading="lazy">
+            <strong>Nequi</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/davivienda.svg" alt="Davivienda" class="partner-logo" loading="lazy">
+            <strong>Davivienda</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/bancodebogota.svg" alt="Banco de Bogot&#225;" class="partner-logo" loading="lazy">
+            <strong>Banco de Bogot&#225;</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/bbva.svg" alt="BBVA Colombia" class="partner-logo" loading="lazy">
+            <strong>BBVA Colombia</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/scotiabank.svg" alt="Scotiabank Colpatria" class="partner-logo" loading="lazy">
+            <strong>Scotiabank</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/pse.svg" alt="PSE" class="partner-logo" loading="lazy">
+            <strong>PSE</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/bancopopular.svg" alt="Banco Popular" class="partner-logo" loading="lazy">
+            <strong>Banco Popular</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/avvillas.svg" alt="AV Villas" class="partner-logo" loading="lazy">
+            <strong>AV Villas</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/cajasocial.svg" alt="Banco Caja Social" class="partner-logo" loading="lazy">
+            <strong>Caja Social</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/daviplata.svg" alt="Daviplata" class="partner-logo" loading="lazy">
+            <strong>Daviplata</strong>
+          </div>
+          <div class="partner-card">
+            <img src="logos/movii.svg" alt="Movii" class="partner-logo" loading="lazy">
+            <strong>Movii</strong>
+          </div>
+        </div>
+
+
+    <section class="section stats-section">
+      <div class="container">
+        <div class="stats-shell reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Indicadores</p>
+            <h2>KreditPlus en numeros.</h2>
+            <p>Nuestra trayectoria habla por si sola.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <strong data-counter="547972" data-prefix="+">0</strong>
+              <span>solicitudes atendidas en flujos digitales</span>
+            </div>
+            <div class="stat-card">
+              <strong data-counter="1283237" data-prefix="+">0</strong>
+              <span>interacciones de servicio y orientación</span>
+            </div>
+            <div class="stat-card">
+              <strong data-counter="2936510" data-prefix="+">0</strong>
+              <span>usuarios alcanzados por contenidos y campañas</span>
+            </div>
+            <div class="stat-card">
+              <strong data-counter="82929" data-prefix="+">0</strong>
+              <span>clientes acompañados con soluciones activas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container sustainability-layout">
+        <div class="copy-block reveal">
+          <p class="eyebrow">Sostenibilidad</p>
+          <h2>En KreditPlus el proposito va mas alla del credito.</h2>
+          <p>
+            Creemos que las finanzas responsables transforman vidas.
+          </p>
+          <ul class="list-check">
+            <li>Diseño editorial para temas ambientales, sociales y de gobierno.</li>
+            <li>Espacios listos para KPIs, reportes y publicaciones institucionales.</li>
+            <li>Composición visual coherente con el resto del sitio y sin depender de assets de terceros.</li>
+          </ul>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card reveal">
+            <span class="card-icon">ESG</span>
+            <h3>Impacto medible</h3>
+            <p>Tarjetas preparadas para explicar programas, cobertura territorial, inclusión y educación financiera.</p>
+            <ul class="simple-list">
+              <li>Rutas de acompañamiento</li>
+              <li>Programas de formación</li>
+              <li>Seguimiento con indicadores</li>
+            </ul>
+          </article>
+
+          <article class="value-card value-card--deep reveal">
+            <span class="card-icon">+</span>
+            <h3>Crecimiento responsable</h3>
+            <p>Credito responsable, inclusivo y transparente para todos los colombianos.</p>
+            <ul class="simple-list">
+              <li>Gobernanza clara</li>
+              <li>Relación cercana con clientes</li>
+              <li>Desarrollo regional</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Servicio al cliente</p>
+          <h2>Atención visible desde el home, no escondida en el footer.</h2>
+          <p>Estamos donde tu estas. Atencion digital 24/7 y red de oficinas en todo el pais.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <span class="card-icon">01</span>
+            <h3>Canal digital</h3>
+            <p>Formulario, simulador, estado de solicitud y autogestión desde un solo flujo.</p>
+            <a class="button-ghost" href="contacto.html">Ir a contacto</a>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-icon">02</span>
+            <h3>Asesoría remota</h3>
+            <p>Llamadas, seguimiento y acompañamiento en pasos críticos sin romper la experiencia.</p>
+            <a class="button-ghost" href="contacto.html#canales">Ver canales</a>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-icon">03</span>
+            <h3>Red de oficinas</h3>
+            <p>Una capa territorial con ciudades, horarios, oficinas destacadas y cobertura progresiva.</p>
+            <a class="button-ghost" href="oficinas.html">Ver oficinas</a>
+          </article>
+        </div>
+
+        <div class="coverage-layout">
+          <div class="map-board reveal">
+            <p class="eyebrow">Cobertura</p>
+            <h3>¿Dónde nos encuentras?</h3>
+            <p>Presencia en las principales ciudades de Colombia.</p>
+
+            <div class="map-board__visual" aria-hidden="true">
+              <div class="map-board__route"></div>
+              <div class="map-board__city map-board__city--one"><span>Bogotá</span></div>
+              <div class="map-board__city map-board__city--two"><span>Bucaramanga</span></div>
+              <div class="map-board__city map-board__city--three"><span>Medellín</span></div>
+              <div class="map-board__city map-board__city--four"><span>Cali</span></div>
+            </div>
+          </div>
+
+          <div class="coverage-grid">
+            <article class="coverage-card reveal">
+              <h3>Red de oficinas</h3>
+              <p>Espacio pensado para mostrar direcciones, horarios y puntos clave de atención presencial.</p>
+              <ul class="simple-list">
+                <li>Atención comercial</li>
+                <li>Radicación de solicitudes</li>
+                <li>Orientación y servicio</li>
+              </ul>
+            </article>
+
+            <article class="coverage-card reveal">
+              <h3>Canales de autoservicio</h3>
+              <p>Integración con formularios, PQRS, preguntas frecuentes y acompañamiento postventa.</p>
+              <ul class="simple-list">
+                <li>Centro de ayuda</li>
+                <li>Seguimiento</li>
+                <li>Notificaciones</li>
+              </ul>
+            </article>
+
+            <article class="coverage-card reveal">
+              <h3>Horarios y prioridades</h3>
+              <p>La estructura está preparada para horarios diferenciados, campañas o temporadas especiales.</p>
+              <ul class="simple-list">
+                <li>Lunes a viernes</li>
+                <li>Sábados programados</li>
+                <li>Escalamiento rápido</li>
+              </ul>
+            </article>
+
+            <article class="coverage-card reveal">
+              <h3>Expansión regional</h3>
+              <p>Tarjetas listas para mostrar nuevas aperturas, regiones priorizadas y aliados operativos.</p>
+              <ul class="simple-list">
+                <li>Ciudades intermedias</li>
+                <li>Aliados comerciales</li>
+                <li>Eventos territoriales</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Contenidos</p>
+          <h2>Un bloque editorial para noticias, educación y servicio.</h2>
+          <p>Aprende a manejar mejor tus finanzas con nuestros articulos de educacion financiera.</p>
+        </div>
+
+        <div class="blog-grid">
+          <article class="blog-card reveal">
+            <div class="blog-card__cover blog-card__cover--one"></div>
+            <span class="pill">Educación financiera</span>
+            <h3>Cómo construir un home financiero que informe y convierta al mismo tiempo</h3>
+            <p>Diseñamos una lectura por capas: hero potente, producto visible, cifras, respaldo institucional, atención y blog.</p>
+            <div class="blog-card__meta">
+              <span class="pill">UX</span>
+              <span class="pill">Arquitectura</span>
+            </div>
+          </article>
+
+          <article class="blog-card reveal">
+            <div class="blog-card__cover blog-card__cover--two"></div>
+            <span class="pill">Servicio</span>
+            <h3>Por qué las PQRS y los canales de atención deben vivir dentro de la navegación principal</h3>
+            <p>Sección preparada para artículos de ayuda, servicio y gestión documental sin depender solo del footer.</p>
+            <div class="blog-card__meta">
+              <span class="pill">Atención</span>
+              <span class="pill">Operación</span>
+            </div>
+          </article>
+
+          <article class="blog-card reveal">
+            <div class="blog-card__cover blog-card__cover--three"></div>
+            <span class="pill">Producto</span>
+            <h3>Qué mostrar primero cuando tu entidad tiene muchas líneas financieras y varios canales</h3>
+            <p>Una buena home no solo enumera productos: orienta, agrupa, prioriza y reduce la carga cognitiva.</p>
+            <div class="blog-card__meta">
+              <span class="pill">Portafolio</span>
+              <span class="pill">Crecimiento</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <p class="eyebrow">Da el primer paso</p>
+            <h2>Listo para obtener tu credito KreditPlus?</h2>
+            <p>Solicita hoy y recibe respuesta en menos de 24 horas. Sin filas, 100% en linea.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="button" href="soluciones.html">Ver productos</a>
+            <a class="button-ghost" href="contacto.html">Abrir contacto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card reveal">
+        <div class="footer-top">
+          <a class="brand" href="index.html">
+            <span class="brand__mark">K</span>
+            <span class="brand__text">
+              KreditPlus
+              <small>Cr&#233;ditos r&#225;pidos y confiables</small>
+            </span>
+          </a>
+          <div class="social-list">
+            <a href="contacto.html" aria-label="Contacto">in</a>
+            <a href="blog.html" aria-label="Blog">fb</a>
+            <a href="oficinas.html" aria-label="Oficinas">ig</a>
+            <a href="simuladores.html" aria-label="Simuladores">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-columns">
+          <div class="footer-column">
+            <h3>Sobre KreditPlus</h3>
+            <p>
+              KreditPlus es una plataforma digital de creditos rapidos y seguros para personas y empresas en Colombia.
+            </p>
+            <ul class="simple-list">
+              <li>Cr&#233;dito personal</li>
+              <li>Capital para negocios</li>
+              <li>Compra de cartera</li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul class="footer-links">
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="soluciones.html">Soluciones</a></li>
+              <li><a href="simuladores.html">Simuladores</a></li>
+              <li><a href="contacto.html">Servicio al cliente</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Presencia</h3>
+            <ul class="footer-links">
+              <li><a href="oficinas.html">Bogotá</a></li>
+              <li><a href="oficinas.html">Bucaramanga</a></li>
+              <li><a href="oficinas.html">Medellín</a></li>
+              <li><a href="oficinas.html">Cali</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Recursos</h3>
+            <ul class="footer-links">
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contacto.html#pqrs">PQRS</a></li>
+              <li><a href="contacto.html#faq">Preguntas frecuentes</a></li>
+              <li><a href="soluciones.html#portafolio">Portafolio</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <span>&copy; <span data-year></span> KreditPlus S.A.S. &mdash; Todos los derechos reservados.</span>
+          <span>Vigilado Superfinanciera &middot; <a href="contacto.html" style="color:inherit">Habeas Data</a> &middot; <a href="contacto.html" style="color:inherit">Pol&#237;tica de Privacidad</a></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" data-modal data-modal-overlay aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal__header">
+        <div>
+          <p class="eyebrow">Proceso</p>
+          <h2 id="modal-title">Ruta sugerida para tu originación digital</h2>
+        </div>
+        <button class="modal__close" type="button" data-modal-close aria-label="Cerrar">Ã—</button>
+      </div>
+
+      <div class="modal__body">
+        <article class="quick-card">
+          <span class="quick-card__number">1</span>
+          <h3>Descubrimiento</h3>
+          <p>Hero potente, CTA directo, simuladores visibles y bloques de segmentación para elegir el producto correcto.</p>
+        </article>
+        <article class="quick-card">
+          <span class="quick-card__number">2</span>
+          <h3>Calificación</h3>
+          <p>Formulario corto y modular, con posibilidad de integrarse luego con scoring, CRM o validación documental.</p>
+        </article>
+        <article class="quick-card">
+          <span class="quick-card__number">3</span>
+          <h3>Acompañamiento</h3>
+          <p>Servicio al cliente y oficinas no como anexos, sino como parte del journey principal.</p>
+        </article>
+        <article class="quick-card">
+          <span class="quick-card__number">4</span>
+          <h3>Retención</h3>
+          <p>Bloques editoriales, sostenibilidad y contenidos para construir relación de largo plazo y mejorar SEO.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="notificaciones.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

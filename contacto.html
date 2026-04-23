@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KreditPlus | Contacto y servicio</title>
+  <meta name="description" content="Contacta con KreditPlus. Atencion al cliente, PQRS y preguntas frecuentes sobre creditos digitales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b4788'/><text x='50' y='70' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ffffff' text-anchor='middle'>K</text></svg>">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+  <div class="utility-bar">
+    <div class="container utility-bar__content">
+      <p>Canales de atenci&oacute;n, servicio al cliente y radicaci&oacute;n de PQRS.</p>
+      <a class="utility-bar__cta" href="#formulario">Ir al formulario</a>
+    </div>
+  </div>
+
+  <header class="site-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">K</span>
+        <span class="brand__text">
+          KreditPlus
+          <small>Cr&eacute;dito digital en Colombia</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-primary-nav aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <details class="nav-dropdown">
+          <summary>Nosotros</summary>
+          <div class="nav-dropdown__menu">
+            <a href="nosotros.html#historia">Quiénes somos</a>
+            <a href="nosotros.html#indicadores">Indicadores</a>
+            <a href="nosotros.html#talento">Talento</a>
+          </div>
+        </details>
+        <details class="nav-dropdown">
+          <summary>Soluciones</summary>
+          <div class="nav-dropdown__menu">
+            <a href="soluciones.html#credito-digital">Crédito digital</a>
+            <a href="soluciones.html#portafolio">Portafolio</a>
+            <a href="simuladores.html">Simuladores</a>
+          </div>
+        </details>
+        <a href="oficinas.html">Oficinas</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html" aria-current="page">Contacto</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="button-secondary" href="#formulario">Escribir ahora</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero" id="canales">
+      <div class="container page-hero__shell">
+        <div class="page-hero__content reveal">
+          <p class="eyebrow">Contacto</p>
+          <h1>Estamos aqu&iacute; para ayudarte.</h1>
+          <p>Canales oficiales de atenci&oacute;n KreditPlus. Resuelve tus dudas, radica solicitudes o recibe acompa&ntilde;amiento personalizado.</p>
+          <div class="page-hero__actions">
+            <a class="button" href="#formulario">Abrir formulario</a>
+            <a class="button-ghost" href="#faq">Ver preguntas frecuentes</a>
+          </div>
+        </div>
+
+        <aside class="page-panel reveal">
+          <p class="eyebrow">Canales</p>
+          <h2>Respuesta r&aacute;pida y efectiva garantizada.</h2>
+          <p>Nuestro equipo de asesores est&aacute; siempre disponible para guiarte en todo momento.</p>
+          <ul class="simple-list">
+            <li>Formulario general</li>
+            <li>Ruta para PQRS</li>
+            <li>Bloques de ayuda y atención</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <span class="card-icon">01</span>
+            <h3>Asesoría comercial</h3>
+            <p>Perfecta para nuevos usuarios, portafolio, montos, plazos y continuidad del proceso.</p>
+          </article>
+          <article class="contact-card reveal">
+            <span class="card-icon">02</span>
+            <h3>Servicio al cliente</h3>
+            <p>Seguimiento de solicitudes, orientación documental y acompañamiento operativo.</p>
+          </article>
+          <article class="contact-card reveal" id="pqrs">
+            <span class="card-icon">03</span>
+            <h3>PQRS</h3>
+            <p>Ruta específica para peticiones, quejas, reclamos, sugerencias y felicitaciones.</p>
+          </article>
+          <article class="contact-card reveal">
+            <span class="card-icon">04</span>
+            <h3>Oficinas</h3>
+            <p>Conexión directa a la red física cuando el usuario necesita atención presencial.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="formulario">
+      <div class="container contact-layout">
+        <div class="page-panel reveal">
+          <p class="eyebrow">Formulario</p>
+          <h2>Cuéntanos en qué podemos ayudarte.</h2>
+          <p>Diligencia el formulario y un asesor se comunicara contigo en menos de 24 horas habiles.</p>
+
+          <form class="contact-form" data-contacto-form>
+            <div class="form-row">
+              <div class="field">
+                <label for="full-name">Nombre completo</label>
+                <input id="full-name" name="full-name" type="text" placeholder="Escribe tu nombre">
+              </div>
+              <div class="field">
+                <label for="email">Correo electrónico</label>
+                <input id="email" name="email" type="email" placeholder="nombre@correo.com">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="phone">Celular</label>
+                <input id="phone" name="phone" type="tel" placeholder="300 123 4567">
+              </div>
+              <div class="field">
+                <label for="topic">Tipo de solicitud</label>
+                <select id="topic" name="topic">
+                  <option>Información comercial</option>
+                  <option>Seguimiento de solicitud</option>
+                  <option>PQRS</option>
+                  <option>Oficinas y horarios</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="message" placeholder="Cuéntanos tu solicitud"></textarea>
+            </div>
+
+            <button class="button" type="submit">Enviar solicitud</button>
+            <p class="small-chip" data-form-feedback>Tu mensaje fue enviado. Te respondemos en menos de 24 horas.</p>
+          </form>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card reveal">
+            <span class="card-icon">FAQ</span>
+            <h3>Claridad total</h3>
+            <p>Encuentra respuestas r&aacute;pidas a las preguntas m&aacute;s comunes de nuestros clientes.</p>
+          </article>
+          <article class="value-card reveal">
+            <span class="card-icon">PQR</span>
+            <h3>Canales directos</h3>
+            <p>Diferentes opciones de contacto adaptadas a cada necesidad espec&iacute;fica.</p>
+          </article>
+          <article class="value-card value-card--deep reveal">
+            <span class="card-icon">SLA</span>
+            <h3>Acompa&ntilde;amiento</h3>
+            <p>Soporte guiado durante todo el ciclo de vida de tu cr&eacute;dito con KreditPlus.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>Resolvemos tus dudas principales.</h2>
+          <p>Revisa esta secci&oacute;n antes de enviar tu consulta para obtener respuestas inmediatas.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-card reveal">
+            <summary>¿Qué documentos necesito para solicitar un crédito?</summary>
+            <p>Documento de identidad vigente, comprobante de ingresos (últimos 3 meses) y datos de contacto. Para créditos empresariales también se solicita RUT y estados financieros recientes.</p>
+          </details>
+          <details class="faq-card reveal">
+            <summary>¿Cuánto tiempo tarda la aprobación?</summary>
+            <p>El proceso de precalificación toma entre 15 y 30 minutos en línea. Una vez aprobado, el desembolso se realiza en un plazo de 1 a 3 días hábiles según el producto.</p>
+          </details>
+          <details class="faq-card reveal">
+            <summary>¿Puedo solicitar mi crédito 100% en línea?</summary>
+            <p>Sí. Todo el proceso desde la solicitud hasta la firma puede hacerse digitalmente. También puedes acercarte a cualquiera de nuestras oficinas si prefieres atención presencial.</p>
+          </details>
+          <details class="faq-card reveal">
+            <summary>¿Cuánto dinero puedo solicitar?</summary>
+            <p>Los montos van desde $500.000 hasta $30.000.000 para créditos personales, y hasta $100.000.000 para créditos empresariales. El monto aprobado depende de tu perfil y capacidad de pago.</p>
+          </details>
+          <details class="faq-card reveal">
+            <summary>¿Qué pasa si ya tengo deudas con otras entidades?</summary>
+            <p>Evaluamos cada caso individualmente. Ofrecemos opciones de compra de cartera para unificar tus obligaciones en una sola cuota más cómoda. Escríbenos y te orientamos.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card reveal">
+        <div class="footer-top">
+          <a class="brand" href="index.html">
+            <span class="brand__mark">K</span>
+            <span class="brand__text">
+              KreditPlus
+              <small>Cr&eacute;dito digital en Colombia</small>
+            </span>
+          </a>
+          <div class="social-list">
+            <a href="contacto.html" aria-label="Contacto">in</a>
+            <a href="blog.html" aria-label="Blog">fb</a>
+            <a href="oficinas.html" aria-label="Oficinas">ig</a>
+            <a href="simuladores.html" aria-label="Simuladores">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-columns">
+          <div class="footer-column">
+            <h3>Sobre la página</h3>
+            <p>Canales de atenci&oacute;n, l&iacute;neas directas y soporte al usuario de KreditPlus en Colombia.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Canales</h3>
+            <ul class="footer-links">
+              <li><a href="#canales">Asesoría</a></li>
+              <li><a href="#pqrs">PQRS</a></li>
+              <li><a href="#formulario">Formulario</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Recursos</h3>
+            <ul class="footer-links">
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="oficinas.html">Oficinas</a></li>
+              <li><a href="simuladores.html">Simuladores</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="soluciones.html">Soluciones</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <span>&copy; <span data-year></span> KreditPlus S.A.S. &mdash; Todos los derechos reservados.</span>
+          <span>Vigilado Superfinanciera &middot; Habeas Data &middot; Pol&iacute;tica de Privacidad</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

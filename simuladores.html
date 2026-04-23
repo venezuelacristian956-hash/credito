@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KreditPlus | Simuladores</title>
+  <meta name="description" content="Compra de cartera de crédito y ahorro para la experiencia multipágina de KreditPlus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b4788'/><text x='50' y='70' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ffffff' text-anchor='middle'>K</text></svg>">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b4788'/><text x='50' y='70' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ffffff' text-anchor='middle'>K</text></svg>">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+  <div class="utility-bar">
+    <div class="container utility-bar__content">
+      <p>Calcula y proyecta tus pagos con nuestras herramientas gratuitas.</p>
+      <a class="utility-bar__cta" href="soluciones.html">Ver portafolio</a>
+    </div>
+  </div>
+
+  <header class="site-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">K</span>
+        <span class="brand__text">
+          KreditPlus
+          <small>Cr&eacute;dito digital en Colombia</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-primary-nav aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <details class="nav-dropdown">
+          <summary>Nosotros</summary>
+          <div class="nav-dropdown__menu">
+            <a href="nosotros.html#historia">Quiénes somos</a>
+            <a href="nosotros.html#indicadores">Indicadores</a>
+            <a href="nosotros.html#talento">Talento</a>
+          </div>
+        </details>
+        <details class="nav-dropdown" open>
+          <summary>Soluciones</summary>
+          <div class="nav-dropdown__menu">
+            <a href="soluciones.html#credito-digital">Crédito digital</a>
+            <a href="soluciones.html#portafolio">Portafolio</a>
+            <a href="#ahorro">Ahorro</a>
+          </div>
+        </details>
+        <a href="oficinas.html">Oficinas</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="button-secondary" href="contacto.html">Solicitar ahora</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero__shell">
+        <div class="page-hero__content reveal">
+          <p class="eyebrow">Simuladores</p>
+          <h1>Simula tu cr&eacute;dito o ahorro.</h1>
+          <p>Usa nuestras calculadoras para proyectar tu cuota mensual o planear tu meta de ahorro con total transparencia.</p>
+          <div class="page-hero__actions">
+            <a class="button" href="#credito">Simular crédito</a>
+            <a class="button-ghost" href="#ahorro">Simular ahorro</a>
+          </div>
+        </div>
+
+        <aside class="page-panel reveal">
+          <p class="eyebrow">Educaci&oacute;n financiera</p>
+          <h2>Toma decisiones informadas.</h2>
+          <p>Te mostramos el panorama completo para que elijas la soluci&oacute;n que mejor se adapta a tu presupuesto.</p>
+          <ul class="simple-list">
+            <li>Cuota estimada</li>
+            <li>Total proyectado</li>
+            <li>Aporte mensual objetivo</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="credito">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Crédito</p>
+          <h2>Simulador de cuota mensual.</h2>
+          <p>Calcula tu cuota mensual, el total de interes y el costo del credito antes de solicitar.</p>
+        </div>
+
+        <div class="calculator-layout">
+          <article class="calculator-card reveal">
+            <h3>Simula tu cuota</h3>
+            <form class="calculator-form" data-loan-form>
+              <div class="field">
+                <label for="loan-amount">Monto del crédito</label>
+                <input id="loan-amount" name="amount" type="number" value="6000000" step="100000">
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="loan-months">Plazo en meses</label>
+                  <input id="loan-months" name="months" type="number" value="24" min="1">
+                </div>
+                <div class="field">
+                  <label for="loan-rate">Tasa anual estimada %</label>
+                  <input id="loan-rate" name="rate" type="number" value="24" step="0.1" min="0">
+                </div>
+              </div>
+            </form>
+          </article>
+
+          <article class="calculator-card reveal">
+            <h3>Resultado estimado</h3>
+            <div class="calculator-result">
+              <span>Cuota mensual aproximada</span>
+              <strong data-loan-payment>$0</strong>
+            </div>
+            <div class="calculator-result">
+              <span>Total proyectado a pagar</span>
+              <strong data-loan-total>$0</strong>
+            </div>
+            <ul class="simple-list">
+              <li>Los valores son referenciales y sujetos a estudio de cr&eacute;dito.</li>
+              <li>Tasas y tarifas vigentes seg&uacute;n el perfil del solicitante.</li>
+              <li>Aplica para libre inversi&oacute;n y capital productivo.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ahorro">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Ahorro</p>
+          <h2>Simulador de meta programada.</h2>
+          <p>Descubre cu&aacute;nto debes aportar mensualmente para alcanzar tus objetivos financieros.</p>
+        </div>
+
+        <div class="calculator-layout">
+          <article class="calculator-card reveal">
+            <h3>Planea tu meta</h3>
+            <form class="calculator-form" data-savings-form>
+              <div class="field">
+                <label for="goal">Meta objetivo</label>
+                <input id="goal" name="goal" type="number" value="12000000" step="100000">
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="term">Plazo en meses</label>
+                  <input id="term" name="term" type="number" value="18" min="1">
+                </div>
+                <div class="field" id="rendimiento">
+                  <label for="yield">Rendimiento anual estimado %</label>
+                  <input id="yield" name="yield" type="number" value="9" step="0.1" min="0">
+                </div>
+              </div>
+            </form>
+          </article>
+
+          <article class="calculator-card reveal">
+            <h3>Resultado estimado</h3>
+            <div class="calculator-result">
+              <span>Aporte mensual sugerido</span>
+              <strong data-savings-deposit>$0</strong>
+            </div>
+            <div class="calculator-result">
+              <span>Tiempo de cumplimiento</span>
+              <strong data-savings-end>0 meses</strong>
+            </div>
+            <ul class="simple-list">
+              <li>Ideal para planear la compra de veh&iacute;culo, estudio o vivienda.</li>
+              <li>Rendimientos proyectados con base en tasas actuales.</li>
+              <li>Inicia tu plan de ahorro desde montos accesibles.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <p class="eyebrow">Siguiente paso</p>
+            <h2>&iquest;Listo para alcanzar tus metas financieras?</h2>
+            <p>Si los n&uacute;meros tienen sentido para ti, solicita tu producto ahora mismo o habla con un experto para ajustar los detalles.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="button" href="soluciones.html">Ver soluciones</a>
+            <a class="button-ghost" href="contacto.html">Continuar con asesor</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card reveal">
+        <div class="footer-top">
+          <a class="brand" href="index.html">
+            <span class="brand__mark">K</span>
+            <span class="brand__text">
+              KreditPlus
+              <small>Cr&eacute;dito digital en Colombia</small>
+            </span>
+          </a>
+          <div class="social-list">
+            <a href="contacto.html" aria-label="Contacto">in</a>
+            <a href="blog.html" aria-label="Blog">fb</a>
+            <a href="oficinas.html" aria-label="Oficinas">ig</a>
+            <a href="simuladores.html" aria-label="Simuladores">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-columns">
+          <div class="footer-column">
+            <h3>Sobre la página</h3>
+            <p>Herramientas de c&aacute;lculo financiero para planear tus cr&eacute;ditos y ahorros con KreditPlus.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Calculadoras</h3>
+            <ul class="footer-links">
+              <li><a href="#credito">Crédito</a></li>
+              <li><a href="#ahorro">Ahorro</a></li>
+              <li><a href="#rendimiento">Rendimiento</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Vínculos</h3>
+            <ul class="footer-links">
+              <li><a href="soluciones.html">Portafolio</a></li>
+              <li><a href="contacto.html">Servicio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Navegación</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="oficinas.html">Oficinas</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <span>&copy; <span data-year></span> KreditPlus S.A.S. &mdash; Todos los derechos reservados.</span>
+          <span>Vigilado Superfinanciera &middot; Habeas Data &middot; Pol&iacute;tica de Privacidad</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+

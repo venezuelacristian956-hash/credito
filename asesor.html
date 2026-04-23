@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KreditPlus | Panel de Asesor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8fafc;--surface:#ffffff;--card:#ffffff;--border:#e2e8f0;--accent:#31cde4;--accent2:#0b4788;--ink:#0f172a;--ink-soft:#64748b;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--radius:16px;--transition:200ms ease}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+button{cursor:pointer;font:inherit;border:0}
+input,select,textarea{font:inherit}
+
+/* LOGIN (Estilo Claro) */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg, #f0f9ff, #e0f2fe)}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:48px 40px;width:100%;max-width:420px;text-align:center;box-shadow:0 20px 40px rgba(11,71,136,.08)}
+.login-logo{display:inline-flex;align-items:center;gap:14px;margin-bottom:32px}
+.login-logo .mark{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-family:'Exo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#0b4788,#31cde4)}
+.login-logo .name{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.3rem;text-align:left;color:#0b4788}
+.login-logo .name small{display:block;font-family:'Source Sans 3',sans-serif;font-size:.75rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase}
+.login-card h1{font-size:1.5rem;font-family:'Exo 2',sans-serif;margin-bottom:8px}
+.login-input{width:100%;padding:14px 18px;background:#f8fafc;border:1px solid var(--border);border-radius:12px;margin-bottom:14px;outline:none}
+.login-input:focus{border-color:var(--accent2);background:#fff}
+.login-btn{width:100%;padding:14px;border-radius:12px;font-weight:700;background:var(--accent2);color:#fff;transition:transform var(--transition)}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(11,71,136,.2)}
+.login-error{color:var(--red);font-size:.9rem;margin-top:10px;display:none}
+
+/* DASHBOARD */
+#dashboard{display:none;min-height:100vh}
+.admin-header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.admin-brand{display:flex;align-items:center;gap:12px}
+.admin-mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:'Exo 2',sans-serif;font-weight:800;color:#fff;font-size:1.1rem;background:var(--accent2)}
+.admin-title{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.1rem;color:var(--accent2)}
+.btn-outline{padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--ink-soft);font-weight:600;transition:all var(--transition)}
+.btn-outline:hover{border-color:var(--accent2);color:var(--accent2)}
+.admin-main{padding:28px;max-width:1200px;margin:0 auto}
+
+.welcome-banner{background:linear-gradient(135deg,var(--accent2),#1e3a8a);color:#fff;padding:24px 32px;border-radius:var(--radius);margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+.welcome-banner h2{font-family:'Exo 2',sans-serif;font-size:1.8rem;margin-bottom:4px}
+.stats-pill{background:rgba(255,255,255,.2);padding:8px 16px;border-radius:99px;font-weight:700}
+
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+.lead-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.lead-name{font-size:1.1rem;font-weight:700;font-family:'Exo 2',sans-serif}
+.lead-date{font-size:.8rem;color:var(--ink-soft)}
+.lead-info{font-size:.9rem;margin-bottom:8px;display:flex;gap:8px}
+.lead-info strong{min-width:70px}
+.lead-actions{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center}
+.status-sel{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:#f8fafc;font-weight:600;color:var(--ink)}
+.btn-whatsapp{padding:8px 16px;border-radius:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;display:inline-block;text-align:center}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:700;text-transform:capitalize}
+.badge-nuevo,.badge-asignado{background:#dbeafe;color:#2563eb}
+.badge-contactado{background:#fef3c7;color:#d97706}
+.badge-aprobado{background:#dcfce3;color:#16a34a}
+.badge-rechazado{background:#fee2e2;color:#dc2626}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark">K</div>
+      <div class="name">KreditPlus <small>Portal Asesores</small></div>
+    </div>
+    <h1>Hola, Asesor</h1>
+    <p style="color:var(--ink-soft);margin-bottom:20px">Ingresa para gestionar tus clientes.</p>
+    <input id="l-email" class="login-input" type="email" placeholder="Correo electrónico">
+    <input id="l-pwd" class="login-input" type="password" placeholder="Contraseña">
+    <button class="login-btn" onclick="doLogin()">Ingresar a mis clientes</button>
+    <p class="login-error" id="login-error">❌ Credenciales incorrectas</p>
+  </div>
+</div>
+
+<div id="dashboard">
+  <header class="admin-header">
+    <div class="admin-brand">
+      <div class="admin-mark">K</div>
+      <div class="admin-title">KreditPlus <small>Asesor</small></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-outline" onclick="loadData()">↻ Actualizar</button>
+      <button class="btn-outline" onclick="logout()">Salir</button>
+    </div>
+  </header>
+
+  <div class="admin-main">
+    <div class="welcome-banner">
+      <div>
+        <h2 id="w-name">Hola</h2>
+        <p style="opacity:0.9">Aquí están los clientes asignados a tu gestión.</p>
+      </div>
+      <div class="stats-pill"><span id="w-count">0</span> leads activos</div>
+    </div>
+
+    <div class="grid-cards" id="leads-grid">
+      <!-- Tarjetas de clientes cargadas por JS -->
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script src="notificaciones.js"></script>
+<script>
+let miAsesor = null;
+let misLeads = [];
+if (typeof initSupabase === 'function') initSupabase();
+let sb = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
+
+// Restaurar sesión
+const saved = sessionStorage.getItem('kp_asesor');
+if (saved) {
+  miAsesor = JSON.parse(saved);
+  showDashboard();
+}
+
+async function doLogin() {
+  if(!sb) { alert("Supabase no configurado"); return; }
+  const email = document.getElementById('l-email').value;
+  const pwd = document.getElementById('l-pwd').value;
+  
+  // Buscar asesor en DB
+  const { data, error } = await sb.from('kreditplus_asesores')
+    .select('*').eq('email', email).eq('clave', pwd).single();
+    
+  if(data) {
+    miAsesor = data;
+    sessionStorage.setItem('kp_asesor', JSON.stringify(data));
+    showDashboard();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('kp_asesor');
+  location.reload();
+}
+
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('w-name').innerText = 'Hola, ' + miAsesor.nombre.split(' ')[0];
+  loadData();
+}
+
+async function loadData() {
+  if(!sb || !miAsesor) return;
+  // Traer solo los leads asignados a miAsesor.id
+  const { data } = await sb.from('kreditplus_solicitudes')
+    .select('*')
+    .eq('asesor_id', miAsesor.id)
+    .order('created_at', {ascending: false});
+    
+  misLeads = data || [];
+  document.getElementById('w-count').innerText = misLeads.length;
+  renderLeads();
+}
+
+function renderLeads() {
+  const grid = document.getElementById('leads-grid');
+  if(!misLeads.length) {
+    grid.innerHTML = '<p style="color:var(--ink-soft)">No tienes clientes asignados en este momento.</p>';
+    return;
+  }
+  
+  grid.innerHTML = misLeads.map(L => {
+    const celular = L.celular.replace(/\D/g,'');
+    const waLink = `https://wa.me/57${celular}?text=Hola%20${encodeURIComponent(L.nombre)},%20soy%20asesor%20de%20KreditPlus.`;
+    
+    return `<div class="lead-card">
+      <div class="lead-header">
+        <div>
+          <div class="lead-name">${L.nombre}</div>
+          <div class="lead-date">${new Date(L.created_at).toLocaleDateString()} - ${L.ciudad||'Sin ciudad'}</div>
+        </div>
+        <span class="badge badge-${L.estado}">${L.estado}</span>
+      </div>
+      <div class="lead-info"><strong>Producto:</strong> ${L.tipo_credito}</div>
+      <div class="lead-info"><strong>Monto:</strong> ${L.monto}</div>
+      <div class="lead-info"><strong>Celular:</strong> ${L.celular}</div>
+      
+      <div class="lead-actions">
+        <select class="status-sel" onchange="changeStatus('${L.id}', this.value)">
+          <option value="asignado" ${L.estado==='asignado'?'selected':''}>Asignado</option>
+          <option value="contactado" ${L.estado==='contactado'?'selected':''}>Contactado</option>
+          <option value="en_estudio" ${L.estado==='en_estudio'?'selected':''}>En Estudio</option>
+          <option value="aprobado" ${L.estado==='aprobado'?'selected':''}>Aprobado</option>
+          <option value="rechazado" ${L.estado==='rechazado'?'selected':''}>Rechazado</option>
+        </select>
+        <a href="${waLink}" target="_blank" class="btn-whatsapp">WhatsApp</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function changeStatus(id, estado) {
+  if(!sb) return;
+  await sb.from('kreditplus_solicitudes').update({ estado }).eq('id', id);
+  
+  // Refrescar lista local para UI y notificar al admin
+  const item = misLeads.find(x=>x.id===id);
+  if(item) {
+    item.estado = estado;
+    if(typeof notificarCambioEstado === 'function') {
+      notificarCambioEstado(item, miAsesor, estado);
+    }
+  }
+  renderLeads();
+}
+</script>
+</body>
+</html>

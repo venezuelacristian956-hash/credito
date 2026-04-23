@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KreditPlus | Admin Master</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060d1a;--surface:#0d1526;--card:#111f35;--border:rgba(49,205,228,.15);--accent:#31cde4;--accent2:#0b4788;--ink:#e2e8f0;--ink-soft:#94a3b8;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--radius:16px;--transition:200ms ease}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font:inherit;border:0}
+input,select{font:inherit}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(circle at 30% 30%,rgba(49,205,228,.12),transparent 40%),var(--bg)}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:48px 40px;width:100%;max-width:420px;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.login-logo{display:inline-flex;align-items:center;gap:14px;margin-bottom:32px}
+.login-logo .mark{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-family:'Exo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#062d57;background:linear-gradient(135deg,#a8f1fb,#31cde4)}
+.login-logo .name{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.3rem;text-align:left}
+.login-logo .name small{display:block;font-family:'Source Sans 3',sans-serif;font-size:.75rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.login-card h1{font-size:1.5rem;font-family:'Exo 2',sans-serif;margin-bottom:8px}
+.login-card p{color:var(--ink-soft);font-size:.95rem;margin-bottom:28px}
+.login-input{width:100%;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--ink);font-size:1rem;margin-bottom:14px;outline:none;transition:border var(--transition)}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{width:100%;padding:14px;border-radius:12px;font-weight:700;font-size:1rem;background:linear-gradient(135deg,var(--accent2),#056a78);color:#fff;transition:transform var(--transition),box-shadow var(--transition)}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(49,205,228,.25)}
+.login-error{color:var(--red);font-size:.9rem;margin-top:10px;display:none}
+
+#dashboard{display:none;min-height:100vh}
+.admin-header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:50}
+.admin-brand{display:flex;align-items:center;gap:12px}
+.admin-mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:'Exo 2',sans-serif;font-weight:800;color:#062d57;font-size:1.1rem;background:linear-gradient(135deg,#a8f1fb,#31cde4)}
+.admin-title{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.1rem}
+.admin-title small{display:block;font-family:'Source Sans 3',sans-serif;font-size:.72rem;color:var(--ink-soft);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.header-actions{display:flex;align-items:center;gap:10px}
+.btn-outline{padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--ink-soft);font-size:.88rem;font-weight:600;transition:all var(--transition)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{padding:8px 18px;border-radius:10px;background:var(--accent2);color:#fff;font-size:.88rem;font-weight:700;transition:all var(--transition)}
+.btn-primary:hover{background:#0d5ba8}
+.admin-main{padding:28px;max-width:1400px;margin:0 auto}
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px}
+.stat-card .num{font-family:'Exo 2',sans-serif;font-size:2rem;font-weight:800;line-height:1}
+.stat-card .lbl{color:var(--ink-soft);font-size:.85rem;margin-top:4px}
+
+.tabs{display:flex;gap:4px;background:var(--card);border-radius:12px;padding:4px;margin-bottom:20px;width:fit-content}
+.tab{padding:8px 20px;border-radius:9px;font-weight:700;font-size:.9rem;color:var(--ink-soft);transition:all var(--transition);cursor:pointer;border:0;background:transparent}
+.tab.active{background:var(--accent2);color:#fff}
+
+.toolbar{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:200px;position:relative}
+.search-box input{width:100%;padding:10px 16px 10px 40px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:.9rem;outline:none;transition:border var(--transition)}
+.search-box input:focus{border-color:var(--accent)}
+.filter-select{padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:.9rem;outline:none;cursor:pointer}
+.btn-export{padding:10px 18px;border-radius:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--green);font-weight:700;font-size:.88rem;transition:all var(--transition)}
+.btn-export:hover{background:rgba(34,197,94,.25)}
+
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:var(--surface);padding:12px 16px;text-align:left;color:var(--ink-soft);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:rgba(255,255,255,.02)}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:700;text-transform:capitalize}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge-nuevo{background:rgba(59,130,246,.15);color:#60a5fa}
+.badge-asignado{background:rgba(168,85,247,.15);color:#c084fc}
+.badge-contactado{background:rgba(245,158,11,.15);color:#fbbf24}
+.badge-aprobado{background:rgba(34,197,94,.15);color:#4ade80}
+.badge-rechazado{background:rgba(239,68,68,.15);color:#f87171}
+.badge-resuelto{background:rgba(34,197,94,.15);color:#4ade80}
+.status-sel{background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);padding:5px 10px;font-size:.82rem;cursor:pointer;outline:none}
+
+.modal-backdrop{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:100;display:none;place-items:center}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:90%;max-width:500px;padding:24px;box-shadow:0 24px 48px rgba(0,0,0,.5)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-title{font-size:1.2rem;font-family:'Exo 2',sans-serif;font-weight:700}
+.modal-close{background:transparent;color:var(--ink-soft);font-size:1.5rem;line-height:1}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.85rem;color:var(--ink-soft);margin-bottom:6px}
+.form-input{width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--ink);outline:none}
+.form-input:focus{border-color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark">K</div>
+      <div class="name">KreditPlus <small>Admin Master</small></div>
+    </div>
+    <h1>Acceso General</h1>
+    <p>Panel para gerencia y asignación de leads.</p>
+    <input id="login-pwd" class="login-input" type="password" placeholder="Contraseña master">
+    <button class="login-btn" onclick="doLogin()">Ingresar</button>
+    <p class="login-error" id="login-error">❌ Contraseña incorrecta</p>
+  </div>
+</div>
+
+<div id="dashboard">
+  <header class="admin-header">
+    <div class="admin-brand">
+      <div class="admin-mark">K</div>
+      <div class="admin-title">KreditPlus <small>Admin Master</small></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-outline" onclick="loadData()">↻ Actualizar</button>
+      <button class="btn-outline" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <div class="admin-main">
+    <div class="stats-row">
+      <div class="stat-card"><div class="num" id="st-solicitudes">0</div><div class="lbl">Total Solicitudes</div></div>
+      <div class="stat-card"><div class="num" id="st-nuevos" style="color:var(--blue)">0</div><div class="lbl">Leads Nuevos</div></div>
+      <div class="stat-card"><div class="num" id="st-asesores">0</div><div class="lbl">Asesores Activos</div></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('solicitudes', this)">📋 Solicitudes</button>
+      <button class="tab" onclick="switchTab('asesores', this)">👥 Asesores</button>
+      <button class="tab" onclick="switchTab('contactos', this)">💬 Contactos</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box"><input type="search" id="search" placeholder="Buscar..." oninput="render()"></div>
+      <select class="filter-select" id="filter-estado" onchange="render()">
+        <option value="">Todos los estados</option>
+        <option value="nuevo">Nuevo</option>
+        <option value="asignado">Asignado</option>
+        <option value="contactado">Contactado</option>
+        <option value="aprobado">Aprobado</option>
+        <option value="rechazado">Rechazado</option>
+      </select>
+      <select class="filter-select" id="filter-asesor" onchange="render()">
+        <option value="">Todos los asesores</option>
+      </select>
+      <button class="btn-primary" id="btn-add-asesor" style="display:none" onclick="openAsesorModal()">+ Nuevo Asesor</button>
+    </div>
+
+    <div class="table-wrap" id="table-wrap"></div>
+  </div>
+</div>
+
+<!-- Modal Asesor -->
+<div class="modal-backdrop" id="modal-asesor">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Nuevo Asesor</div>
+      <button class="modal-close" onclick="closeModal('modal-asesor')">×</button>
+    </div>
+    <div class="form-group">
+      <label>Nombre Completo</label>
+      <input type="text" id="as-nombre" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Email (Usuario)</label>
+      <input type="email" id="as-email" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Contraseña de acceso</label>
+      <input type="text" id="as-clave" class="form-input" value="asesor2024">
+    </div>
+    <div class="form-group">
+      <label>Celular</label>
+      <input type="text" id="as-celular" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Zona</label>
+      <input type="text" id="as-zona" class="form-input">
+    </div>
+    <button class="btn-primary" style="width:100%" onclick="saveAsesor()">Guardar Asesor</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script src="notificaciones.js"></script>
+<script>
+let currentTab = 'solicitudes';
+let data = { solicitudes: [], asesores: [], contactos: [] };
+if (typeof initSupabase === 'function') initSupabase();
+let sb = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
+
+// Auth
+function doLogin() {
+  const pwd = document.getElementById('login-pwd').value;
+  if(pwd === (typeof KREDITPLUS_CONFIG!=='undefined'?KREDITPLUS_CONFIG.adminPassword:'kreditplus2024')){
+    sessionStorage.setItem('kp_master', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function logout() { sessionStorage.removeItem('kp_master'); location.reload(); }
+if(sessionStorage.getItem('kp_master')==='1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  if(sb) loadData();
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentTab = tab;
+  document.getElementById('btn-add-asesor').style.display = tab==='asesores'?'block':'none';
+  document.getElementById('filter-estado').style.display = tab==='asesores'?'none':'block';
+  document.getElementById('filter-asesor').style.display = tab==='asesores'?'none':'block';
+  render();
+}
+
+async function loadData() {
+  if(!sb) return;
+  const [sol, ase, con] = await Promise.all([
+    sb.from('kreditplus_solicitudes').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
+    sb.from('kreditplus_asesores').select('*').order('created_at',{ascending:false}),
+    sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false})
+  ]);
+  data.solicitudes = sol.data || [];
+  data.asesores = ase.data || [];
+  data.contactos = con.data || [];
+  
+  // Populate filter
+  const sel = document.getElementById('filter-asesor');
+  sel.innerHTML = '<option value="">Todos los asesores</option>' + 
+    data.asesores.map(a => `<option value="${a.id}">${a.nombre}</option>`).join('');
+    
+  updateStats();
+  render();
+}
+
+function updateStats() {
+  document.getElementById('st-solicitudes').innerText = data.solicitudes.length;
+  document.getElementById('st-nuevos').innerText = data.solicitudes.filter(s=>s.estado==='nuevo').length;
+  document.getElementById('st-asesores').innerText = data.asesores.length;
+}
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const est = document.getElementById('filter-estado').value;
+  const aseId = document.getElementById('filter-asesor').value;
+  const wrap = document.getElementById('table-wrap');
+  
+  let list = data[currentTab].filter(item => {
+    const text = Object.values(item).join(' ').toLowerCase();
+    return (!q || text.includes(q)) &&
+           (!est || item.estado === est) &&
+           (!aseId || item.asesor_id === aseId);
+  });
+
+  if(!list.length) {
+    wrap.innerHTML = `<div style="padding:40px;text-align:center;color:var(--ink-soft)">No hay registros.</div>`;
+    return;
+  }
+
+  const asesorOpts = data.asesores.map(a=>`<option value="${a.id}">${a.nombre}</option>`).join('');
+
+  if(currentTab === 'solicitudes') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Fecha</th><th>Cliente</th><th>Monto</th><th>Ciudad</th><th>Estado</th><th>Asignado A</th></tr></thead>
+      <tbody>${list.map(r=>`<tr>
+        <td style="color:var(--ink-soft)">${new Date(r.created_at).toLocaleDateString()}</td>
+        <td><strong>${r.nombre}</strong><br><small style="color:var(--ink-soft)">${r.celular}</small></td>
+        <td>${r.monto}</td><td>${r.ciudad}</td>
+        <td><span class="badge badge-${r.estado||'nuevo'}">${r.estado||'nuevo'}</span></td>
+        <td>
+          <select class="status-sel" onchange="assignLead('solicitudes','${r.id}',this.value)">
+            <option value="">-- Sin asignar --</option>
+            ${data.asesores.map(a=>`<option value="${a.id}" ${r.asesor_id===a.id?'selected':''}>${a.nombre}</option>`).join('')}
+          </select>
+        </td>
+      </tr>`).join('')}</tbody></table>`;
+  } 
+  else if (currentTab === 'asesores') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Nombre</th><th>Email / Clave</th><th>Zona</th><th>Leads Asignados</th></tr></thead>
+      <tbody>${list.map(r=>{
+        const count = data.solicitudes.filter(s=>s.asesor_id===r.id).length;
+        return `<tr>
+          <td><strong>${r.nombre}</strong><br><small style="color:var(--ink-soft)">${r.celular}</small></td>
+          <td>${r.email}<br><small style="color:var(--ink-soft)">Clave: ${r.clave}</small></td>
+          <td>${r.zona}</td>
+          <td><span class="badge badge-asignado">${count}</span></td>
+        </tr>`;
+      }).join('')}</tbody></table>`;
+  }
+}
+
+async function assignLead(table, id, asesorId) {
+  if(!sb) return;
+  const val = asesorId || null;
+  const nuevoEst = val ? 'asignado' : 'nuevo';
+  await sb.from('kreditplus_'+table).update({ asesor_id: val, estado: nuevoEst }).eq('id', id);
+  
+  // Si se asignó un asesor a una solicitud, notificar
+  if (val && table === 'solicitudes' && typeof notificarAsignacionLead === 'function') {
+    const lead = data.solicitudes.find(s => s.id === id);
+    const asesor = data.asesores.find(a => a.id === asesorId);
+    if (lead && asesor) notificarAsignacionLead(lead, asesor);
+  }
+  
+  loadData();
+}
+
+function openAsesorModal() { document.getElementById('modal-asesor').style.display='grid'; }
+function closeModal(id) { document.getElementById(id).style.display='none'; }
+
+async function saveAsesor() {
+  if(!sb) { alert("Error: Conexión a base de datos no configurada."); return; }
+  
+  const payload = {
+    nombre: document.getElementById('as-nombre').value,
+    email: document.getElementById('as-email').value,
+    clave: document.getElementById('as-clave').value,
+    celular: document.getElementById('as-celular').value,
+    zona: document.getElementById('as-zona').value
+  };
+  
+  if(!payload.nombre || !payload.email) {
+    alert("Por favor ingresa nombre y correo electrónico.");
+    return;
+  }
+
+  const { data, error } = await sb.from('kreditplus_asesores').insert([payload]);
+  
+  if (error) {
+    console.error("Supabase Error:", error);
+    alert("Hubo un error al guardar: " + error.message);
+  } else {
+    alert("Asesor creado correctamente.");
+  }
+  
+  closeModal('modal-asesor');
+  document.getElementById('as-nombre').value = '';
+  document.getElementById('as-email').value = '';
+  document.getElementById('as-celular').value = '';
+  document.getElementById('as-zona').value = '';
+  document.getElementById('as-clave').value = 'asesor2024';
+  
+  loadData();
+}
+</script>
+</body>
+</html>
