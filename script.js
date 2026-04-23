@@ -304,7 +304,7 @@ function setupContactoForm() {
     };
 
     if (!datos.nombre) {
-      if (feedback) feedback.textContent = '⚠️ El nombre es requerido.';
+      if (feedback) { feedback.textContent = '⚠️ El nombre es requerido.'; feedback.style.display = 'block'; }
       if (btn) { btn.disabled = false; btn.textContent = 'Enviar solicitud'; }
       return;
     }
@@ -315,14 +315,14 @@ function setupContactoForm() {
         : { error: 'no_config' };
 
       if (result.error && result.error !== 'no_config') {
-        if (feedback) feedback.textContent = '❌ Error al enviar. Intenta de nuevo.';
+        if (feedback) { feedback.textContent = '❌ Error al enviar. Intenta de nuevo.'; feedback.style.display = 'block'; }
       } else {
         form.reset();
-        if (feedback) feedback.textContent = '✅ Mensaje enviado. Te respondemos en menos de 24 horas.';
+        if (feedback) { feedback.textContent = '✅ Mensaje enviado. Te respondemos en menos de 24 horas.'; feedback.style.display = 'block'; }
         if (btn) btn.textContent = '¡Enviado!';
       }
     } catch (err) {
-      if (feedback) feedback.textContent = '❌ Error de conexión. Intenta de nuevo.';
+      if (feedback) { feedback.textContent = '❌ Error de conexión. Intenta de nuevo.'; feedback.style.display = 'block'; }
     } finally {
       if (btn) btn.disabled = false;
     }
