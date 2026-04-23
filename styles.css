@@ -584,13 +584,50 @@ main {
 .page-panel .field select,
 .page-panel .field textarea {
   color: var(--ink-inverse);
+  background: rgba(11, 71, 136, 0.55);
+  border-color: rgba(49, 205, 228, 0.35);
 }
 
+/* Opciones del dropdown en paneles oscuros */
+.hero__panel .field select option,
+.page-panel .field select option {
+  background: #0b3d6e;
+  color: #ffffff;
+}
+
+/* Placeholder color for inputs/textarea in dark panels */
 .hero__panel .field input::placeholder,
 .hero__panel .field textarea::placeholder,
 .page-panel .field input::placeholder,
 .page-panel .field textarea::placeholder {
-  color: rgba(239, 250, 255, 0.66);
+  color: rgba(239, 250, 255, 0.55);
+}
+
+/* Select placeholder (first option) */
+.hero__panel .field select,
+.page-panel .field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2331cde4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* Select en contexto claro (fuera de paneles oscuros) */
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230b4788' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.field select option {
+  background: #ffffff;
+  color: #0f172a;
 }
 
 .trust-inline {
