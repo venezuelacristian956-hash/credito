@@ -1,4 +1,4 @@
-// ════════════════════════════════════════════════════════
+﻿// ════════════════════════════════════════════════════════
 //  KreditPlus — Sistema de Servicios Rápidos
 //  servicios-modal.js
 //  Modales: Pagar Cuota | Quiénes Somos | Estado Crédito | Verificar Asesor
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ══════════════════════════════════════════════════════
   //  APERTURA / CIERRE DE MODALES DE SERVICIO
   // ══════════════════════════════════════════════════════
-  function openServiceModal(modalId) {
+  let openServiceModal = function(modalId) {
     const m = document.getElementById(modalId);
     if (!m) return;
     m.setAttribute('aria-hidden', 'false');
@@ -310,4 +310,84 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-service-modal-root][aria-hidden="false"]').forEach(m => closeServiceModal(m));
   });
 
+
+  // ─── MODAL: PAGAR CUOTA (Cuentas dinámicas) ───
+  async function loadCuentasPago() {
+    const container = document.getElementById('kpsm-pagos-container');
+    if (!container) return;
+
+    if (!sb) {
+      container.innerHTML = `<div class="kpsm-card kpsm-card--warn"><p>Servicio no disponible temporalmente. Contacte a su asesor.</p></div>`;
+      return;
+    }
+
+    try {
+      const { data, error } = await sb.from('kreditplus_cuentas_pago').select('*').eq('activo', true).order('banco');
+      
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        container.innerHTML = `<div class="kpsm-card kpsm-card--empty" style="text-align:center;"><p>No hay cuentas de pago configuradas en este momento. Por favor contacte a su asesor.</p></div>`;
+        return;
+      }
+
+      const getBgColor = (banco) => {
+        banco = banco.toLowerCase();
+        if (banco.includes('nequi')) return '#7B2D8B';
+        if (banco.includes('bancolombia')) return '#FFDD00';
+        if (banco.includes('daviplata') || banco.includes('davivienda')) return '#E30613';
+        if (banco.includes('bogota') || banco.includes('bogotá')) return '#009A44';
+        if (banco.includes('caja social')) return '#FF6B00';
+        return '#0b4788'; // Default
+      };
+
+      const getTextColor = (banco) => {
+        banco = banco.toLowerCase();
+        if (banco.includes('bancolombia')) return '#002B5B';
+        return '#ffffff';
+      };
+
+      const items = data.map(cta => {
+        const bg = getBgColor(cta.banco);
+        const txt = getTextColor(cta.banco);
+        const shortName = cta.banco.substring(0, 10).toUpperCase();
+
+        // Generar texto para WhatsApp
+        let textMsg = `Hola, quiero pagar mi cuota y solicito confirmación de la cuenta: ${cta.banco} (${cta.tipo_cuenta}) - ${cta.numero_cuenta} a nombre de ${cta.titular}`;
+        
+        return `
+          <a href="https://wa.me/573245654320?text=${encodeURIComponent(textMsg)}" target="_blank"
+            style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:2px solid #e2f0fa;text-decoration:none;transition:all .2s;background:#f8fcff;">
+            
+            <div style="width:44px;height:44px;background:${bg};border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.6rem;color:${txt};text-align:center;line-height:1.2;flex-shrink:0;">
+              ${shortName}
+            </div>
+            
+            <div style="overflow:hidden;">
+              <strong style="display:block;color:#0b4788;font-size:0.95rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">Pagar con ${cta.banco}</strong>
+              <span style="color:#4d6788;font-size:0.8rem;display:block;">${cta.tipo_cuenta}: ${cta.numero_cuenta}</span>
+              <span style="color:#94a3b8;font-size:0.75rem;display:block;">${cta.titular}</span>
+            </div>
+            
+            <span style="margin-left:auto;color:#31cde4;font-size:1.2rem;">&#8594;</span>
+          </a>
+        `;
+      }).join('');
+
+      container.innerHTML = items;
+
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<div class="kpsm-card kpsm-card--error"><p>Error al cargar las cuentas. Inténtalo más tarde.</p></div>`;
+    }
+  }
+
+  // Interceptar la apertura de modal-pagar para cargar las cuentas dinámicas
+  const originalOpenServiceModal = openServiceModal;
+  openServiceModal = function(modalId) {
+    originalOpenServiceModal(modalId);
+    if (modalId === 'modal-pagar') {
+      loadCuentasPago();
+    }
+  };
 }); // end DOMContentLoaded

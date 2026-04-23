@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -139,13 +139,43 @@ tr:hover td{background:rgba(255,255,255,.02)}
         <option value="">Todos los asesores</option>
       </select>
       <button class="btn-primary" id="btn-add-asesor" style="display:none" onclick="openAsesorModal()">+ Nuevo Asesor</button>
+      <button class="btn-primary" id="btn-add-cuenta" style="display:none" onclick="openCuentaModal()">+ Nueva Cuenta</button>
     </div>
 
     <div class="table-wrap" id="table-wrap"></div>
   </div>
 </div>
 
-<!-- Modal Asesor -->
+  <!-- Modal Cuenta de Pago -->
+  <div class="modal-backdrop" id="modal-cuenta">
+    <div class="modal">
+      <h3>Nueva Cuenta de Pago</h3>
+      <form id="form-cuenta" onsubmit="saveCuenta(event)">
+        <div class="input-group">
+          <label>Banco / Billetera (Ej. Bancolombia, Nequi)</label>
+          <input type="text" id="cta-banco" required>
+        </div>
+        <div class="input-group">
+          <label>Tipo de Cuenta (Ahorros, Corriente, N/A)</label>
+          <input type="text" id="cta-tipo" required>
+        </div>
+        <div class="input-group">
+          <label>Número de Cuenta / Celular</label>
+          <input type="text" id="cta-numero" required>
+        </div>
+        <div class="input-group">
+          <label>Nombre del Titular</label>
+          <input type="text" id="cta-titular" required>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <button type="button" class="btn-outline" onclick="document.getElementById('modal-cuenta').style.display='none'">Cancelar</button>
+          <button type="submit" class="btn-primary" style="width:100%" id="btn-save-cuenta">Guardar Cuenta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Asesor -->
 <div class="modal-backdrop" id="modal-asesor">
   <div class="modal">
     <div class="modal-header">
@@ -181,7 +211,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <script src="notificaciones.js"></script>
 <script>
 let currentTab = 'solicitudes';
-let data = { solicitudes: [], asesores: [], contactos: [] };
+let data = { solicitudes: [], asesores: [], contactos: [], cuentas: [] };
 if (typeof initSupabase === 'function') initSupabase();
 let sb = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
 
@@ -216,7 +246,7 @@ function switchTab(tab, el) {
 
 async function loadData() {
   if(!sb) return;
-  const [sol, ase, con] = await Promise.all([
+  const [sol, ase, con, ctas] = await Promise.all([
     sb.from('kreditplus_solicitudes').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
     sb.from('kreditplus_asesores').select('*').order('created_at',{ascending:false}),
     sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false})
@@ -310,7 +340,29 @@ async function assignLead(table, id, asesorId) {
   loadData();
 }
 
-function openAsesorModal() { document.getElementById('modal-asesor').style.display='grid'; }
+    function openCuentaModal() {
+      document.getElementById('form-cuenta').reset();
+      document.getElementById('modal-cuenta').style.display = 'flex';
+    }
+    async function saveCuenta(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-save-cuenta');
+      btn.innerText = 'Guardando...'; btn.disabled = true;
+      const b = document.getElementById('cta-banco').value;
+      const t = document.getElementById('cta-tipo').value;
+      const n = document.getElementById('cta-numero').value;
+      const tit = document.getElementById('cta-titular').value;
+      const {error} = await sb.from('kreditplus_cuentas_pago').insert([{ banco: b, tipo_cuenta: t, numero_cuenta: n, titular: tit }]);
+      btn.innerText = 'Guardar Cuenta'; btn.disabled = false;
+      if(error) alert('Error: '+error.message);
+      else { document.getElementById('modal-cuenta').style.display = 'none'; loadData(); }
+    }
+    async function toggleCuenta(id, val) {
+      const {error} = await sb.from('kreditplus_cuentas_pago').update({activo: val}).eq('id', id);
+      if(error) alert('Error: '+error.message); else loadData();
+    }
+
+    function openAsesorModal() { document.getElementById('modal-asesor').style.display='grid'; }
 function closeModal(id) { document.getElementById(id).style.display='none'; }
 
 async function saveAsesor() {

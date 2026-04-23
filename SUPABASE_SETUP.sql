@@ -162,3 +162,27 @@ ON CONFLICT DO NOTHING;
 ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS cedula    TEXT;
 ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS email     TEXT;
 ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS ocupacion TEXT;
+
+-- ═══════ TABLA: kreditplus_cuentas_pago (Cuentas para recaudo/pagos) ═══════
+CREATE TABLE IF NOT EXISTS kreditplus_cuentas_pago (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  banco text NOT NULL,
+  tipo_cuenta text NOT NULL,
+  numero_cuenta text NOT NULL,
+  titular text NOT NULL,
+  activo boolean DEFAULT true,
+  created_at timestamp with time zone DEFAULT now()
+);
+
+-- Políticas RLS para cuentas de pago
+ALTER TABLE kreditplus_cuentas_pago ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "anon_select_cuentas_pago" ON kreditplus_cuentas_pago;
+DROP POLICY IF EXISTS "auth_all_cuentas_pago" ON kreditplus_cuentas_pago;
+
+CREATE POLICY "anon_select_cuentas_pago"
+  ON kreditplus_cuentas_pago FOR SELECT TO anon USING (activo = true);
+
+CREATE POLICY "auth_all_cuentas_pago"
+  ON kreditplus_cuentas_pago FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
