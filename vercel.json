@@ -1,0 +1,24 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/asesor", "destination": "/asesor.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/contacto", "destination": "/contacto.html" },
+    { "source": "/nosotros", "destination": "/nosotros.html" },
+    { "source": "/oficinas", "destination": "/oficinas.html" },
+    { "source": "/simuladores", "destination": "/simuladores.html" },
+    { "source": "/soluciones", "destination": "/soluciones.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
+  ]
+}
