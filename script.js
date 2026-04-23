@@ -1,4 +1,4 @@
-// KreditPlus — script principal
+﻿// KreditPlus — script principal
 // Supabase se inicializa desde supabase-client.js (cargado antes de este script)
 
 const currency = new Intl.NumberFormat("es-CO", {
@@ -237,29 +237,36 @@ function setupModal() {
   });
 }
 
-// Formulario de precalificación (hero de index.html)
+// Formulario de solicitud de crédito (modal en index.html)
 function setupSolicitudForm() {
-  const form = document.querySelector("[data-quick-form]");
+  const form = document.querySelector('[data-quick-form]');
   if (!form) return;
 
   const btn = form.querySelector("button[type='submit']");
-  const feedback = form.querySelector("[data-form-feedback]");
+  const feedback = form.querySelector('[data-form-feedback]');
+  const successScreen = document.querySelector('[data-success-screen]');
+  const successName = document.querySelector('[data-success-name]');
+  const successEmail = document.querySelector('[data-success-email]');
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+    if (feedback) feedback.style.display = 'none';
 
     const datos = {
-      tipo_credito: form.querySelector('[name="tipo"]')?.value || '',
-      monto:        form.querySelector('[name="monto"]')?.value || '',
-      nombre:       form.querySelector('[name="nombre"]')?.value || '',
+      tipo_credito: form.querySelector('[name="tipo"]')?.value    || '',
+      monto:        form.querySelector('[name="monto"]')?.value   || '',
+      nombre:       form.querySelector('[name="nombre"]')?.value  || '',
+      cedula:       form.querySelector('[name="cedula"]')?.value  || '',
+      email:        form.querySelector('[name="email"]')?.value   || '',
       celular:      form.querySelector('[name="celular"]')?.value || '',
-      ciudad:       form.querySelector('[name="ciudad"]')?.value || ''
+      ciudad:       form.querySelector('[name="ciudad"]')?.value  || '',
+      ocupacion:    form.querySelector('[name="ocupacion"]')?.value || ''
     };
 
-    if (!datos.nombre || !datos.celular) {
-      if (feedback) feedback.textContent = '⚠️ Nombre y celular son requeridos.';
-      if (btn) { btn.disabled = false; btn.textContent = 'Quiero avanzar'; }
+    if (!datos.nombre || !datos.celular || !datos.cedula) {
+      if (feedback) { feedback.textContent = '⚠️ Nombre, cédula y celular son obligatorios.'; feedback.style.display = 'flex'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Enviar solicitud &rarr;'; }
       return;
     }
 
@@ -269,16 +276,21 @@ function setupSolicitudForm() {
         : { error: 'no_config' };
 
       if (result.error && result.error !== 'no_config') {
-        if (feedback) feedback.textContent = '❌ Error al enviar. Intenta de nuevo.';
+        if (feedback) { feedback.textContent = '❌ Error al enviar. Intenta de nuevo.'; feedback.style.display = 'flex'; }
+        if (btn) { btn.disabled = false; btn.innerHTML = 'Enviar solicitud &rarr;'; }
       } else {
-        form.reset();
-        if (feedback) feedback.textContent = '✅ ¡Solicitud recibida! Te contactamos pronto.';
-        if (btn) btn.textContent = '¡Enviado!';
+        // Mostrar pantalla de éxito — ocultar formulario
+        form.style.display = 'none';
+        if (feedback) feedback.style.display = 'none';
+        if (successScreen) {
+          successScreen.style.display = 'block';
+          if (successName)  successName.textContent  = datos.nombre.split(' ')[0];
+          if (successEmail) successEmail.textContent = datos.email || 'tu correo registrado';
+        }
       }
     } catch (err) {
-      if (feedback) feedback.textContent = '❌ Error de conexión. Intenta de nuevo.';
-    } finally {
-      if (btn) btn.disabled = false;
+      if (feedback) { feedback.textContent = '❌ Error de conexión. Intenta de nuevo.'; feedback.style.display = 'flex'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Enviar solicitud &rarr;'; }
     }
   });
 }

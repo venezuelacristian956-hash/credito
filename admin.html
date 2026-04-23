@@ -262,10 +262,13 @@ function render() {
 
   if(currentTab === 'solicitudes') {
     wrap.innerHTML = `<table>
-      <thead><tr><th>Fecha</th><th>Cliente</th><th>Monto</th><th>Ciudad</th><th>Estado</th><th>Asignado A</th></tr></thead>
+      <thead><tr><th>Fecha</th><th>Cliente</th><th>Cédula</th><th>Email</th><th>Ocupación</th><th>Monto</th><th>Ciudad</th><th>Estado</th><th>Asignado A</th></tr></thead>
       <tbody>${list.map(r=>`<tr>
         <td style="color:var(--ink-soft)">${new Date(r.created_at).toLocaleDateString()}</td>
         <td><strong>${r.nombre}</strong><br><small style="color:var(--ink-soft)">${r.celular}</small></td>
+        <td style="color:var(--ink-soft)">${r.cedula||'—'}</td>
+        <td style="color:var(--ink-soft);font-size:.82rem">${r.email||'—'}</td>
+        <td style="color:var(--ink-soft)">${r.ocupacion||'—'}</td>
         <td>${r.monto}</td><td>${r.ciudad}</td>
         <td><span class="badge badge-${r.estado||'nuevo'}">${r.estado||'nuevo'}</span></td>
         <td>

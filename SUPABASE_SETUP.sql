@@ -36,8 +36,11 @@ CREATE TABLE IF NOT EXISTS kreditplus_solicitudes (
   tipo_credito TEXT,
   monto        TEXT,
   nombre       TEXT         NOT NULL,
+  cedula       TEXT,
+  email        TEXT,
   celular      TEXT         NOT NULL,
   ciudad       TEXT,
+  ocupacion    TEXT,
   estado       TEXT         DEFAULT 'nuevo'
                             CHECK (estado IN ('nuevo','asignado','contactado','en_estudio',
                                               'documentacion','aprobado','desembolsado',
@@ -153,3 +156,9 @@ INSERT INTO kreditplus_contactos (nombre, email, telefono, tipo_solicitud, mensa
   ('Laura Gómez',  'laura@email.com',  '311 444 5566', 'Seguimiento de solicitud', 'Quiero saber el estado de mi solicitud.',     'asignado'),
   ('Pedro Suárez', 'pedro@email.com',  '312 777 8899', 'PQRS',                     'Tuve un problema con mi proceso de pago.',    'resuelto')
 ON CONFLICT DO NOTHING;
+
+-- ─── 8. MIGRACIÓN: Agregar nuevas columnas a base de datos existente ──
+-- Ejecuta esto si ya tenías la tabla creada antes de esta versión:
+ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS cedula    TEXT;
+ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS email     TEXT;
+ALTER TABLE kreditplus_solicitudes ADD COLUMN IF NOT EXISTS ocupacion TEXT;

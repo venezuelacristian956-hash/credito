@@ -897,16 +897,18 @@
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal__header">
         <div>
-          <p class="eyebrow">Solicitud rápida</p>
-          <h2 id="modal-title">Cuéntanos sobre tu crédito</h2>
+          <p class="eyebrow">Solicitud de crédito</p>
+          <h2 id="modal-title">Completa tu perfil financiero</h2>
         </div>
         <button class="modal__close" type="button" data-modal-close aria-label="Cerrar">&times;</button>
       </div>
       <div class="modal__body">
+
+        <!-- FORMULARIO -->
         <form class="quick-form" data-quick-form novalidate>
           <div class="form-row">
             <div class="field">
-              <label for="q-tipo">¿Qué tipo de crédito buscas?</label>
+              <label for="q-tipo">Tipo de crédito</label>
               <select id="q-tipo" name="tipo" required>
                 <option value="">Selecciona una opción</option>
                 <option value="Crédito personal">Crédito personal</option>
@@ -917,7 +919,7 @@
               </select>
             </div>
             <div class="field">
-              <label for="q-monto">¿Cuánto necesitas?</label>
+              <label for="q-monto">Monto requerido</label>
               <select id="q-monto" name="monto" required>
                 <option value="">Selecciona un rango</option>
                 <option value="Hasta $2.000.000">Hasta $2.000.000</option>
@@ -928,25 +930,70 @@
               </select>
             </div>
           </div>
+
           <div class="form-row">
             <div class="field">
               <label for="q-nombre">Nombre completo</label>
               <input id="q-nombre" name="nombre" type="text" placeholder="Tu nombre completo" required>
             </div>
             <div class="field">
+              <label for="q-cedula">Número de cédula</label>
+              <input id="q-cedula" name="cedula" type="text" placeholder="123456789" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="q-email">Correo electrónico</label>
+              <input id="q-email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required>
+            </div>
+            <div class="field">
               <label for="q-celular">Celular</label>
               <input id="q-celular" name="celular" type="tel" placeholder="300 123 4567" required>
             </div>
           </div>
-          <div class="field">
-            <label for="q-ciudad">Ciudad</label>
-            <input id="q-ciudad" name="ciudad" type="text" placeholder="Bogotá, Medellín, Cali..." required>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="q-ciudad">Ciudad</label>
+              <input id="q-ciudad" name="ciudad" type="text" placeholder="Bogotá, Medellín, Cali..." required>
+            </div>
+            <div class="field">
+              <label for="q-ocupacion">¿A qué te dedicas?</label>
+              <select id="q-ocupacion" name="ocupacion" required>
+                <option value="">Selecciona tu actividad</option>
+                <option value="Empleado sector privado">Empleado sector privado</option>
+                <option value="Empleado sector público">Empleado sector público</option>
+                <option value="Pensionado">Pensionado</option>
+                <option value="Independiente / Freelance">Independiente / Freelance</option>
+                <option value="Microempresario">Microempresario</option>
+                <option value="Empresario PYME">Empresario PYME</option>
+                <option value="Comerciante">Comerciante</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
           </div>
-          <button class="button" type="submit" style="width:100%;margin-top:8px">Quiero avanzar &rarr;</button>
+
+          <button class="button" type="submit" style="width:100%;margin-top:10px;min-height:54px;font-size:1.05rem">
+            Enviar solicitud &rarr;
+          </button>
           <p class="small-chip" data-form-feedback style="display:none;margin-top:12px;width:100%;justify-content:center"></p>
         </form>
-        <p style="font-size:0.82rem;color:rgba(239,250,255,0.5);margin-top:14px;text-align:center">
-          Un asesor te contactará en menos de 24 horas hábiles. Tus datos están protegidos.
+
+        <!-- PANTALLA DE ÉXITO (oculta por defecto) -->
+        <div data-success-screen style="display:none;text-align:center;padding:20px 0">
+          <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem">✓</div>
+          <h3 style="font-family:'Exo 2',sans-serif;font-size:1.6rem;margin-bottom:10px">¡Solicitud recibida!</h3>
+          <p style="color:rgba(239,250,255,0.75);margin-bottom:6px">Gracias, <strong data-success-name></strong>.</p>
+          <p style="color:rgba(239,250,255,0.75);margin-bottom:24px">Un asesor KreditPlus se pondrá en contacto contigo en menos de <strong style="color:#31cde4">24 horas hábiles</strong> para continuar con tu proceso.</p>
+          <div style="background:rgba(49,205,228,0.1);border:1px solid rgba(49,205,228,0.25);border-radius:14px;padding:16px;font-size:0.9rem;color:rgba(239,250,255,0.65)">
+            📋 Revisa tu correo <strong data-success-email style="color:#31cde4"></strong> para más información.
+          </div>
+          <button class="button-ghost" type="button" data-modal-close style="margin-top:20px;width:100%">Cerrar</button>
+        </div>
+
+        <p style="font-size:0.8rem;color:rgba(239,250,255,0.4);margin-top:16px;text-align:center">
+          Tus datos están protegidos bajo nuestra Política de Privacidad y Habeas Data.
         </p>
       </div>
     </div>
