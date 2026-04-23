@@ -213,3 +213,23 @@ CREATE POLICY "auth_all_pagos"
 -- IMPORTANTE: Para guardar imágenes, se debe crear un bucket en Storage llamado "comprobantes" 
 -- y darle permisos públicos (Public) y permitir INSERT a anon.
 
+
+-- ═══════ CONFIGURACIÓN DEL BUCKET DE STORAGE ═══════
+-- 1. Crear el bucket si no existe
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('comprobantes', 'comprobantes', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- 2. Eliminar políticas viejas si existen
+DROP POLICY IF EXISTS "Permitir lectura publica de comprobantes" ON storage.objects;
+DROP POLICY IF EXISTS "Permitir subida a anon de comprobantes" ON storage.objects;
+
+-- 3. Crear política para que todo el mundo pueda VER las imágenes
+CREATE POLICY "Permitir lectura publica de comprobantes"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'comprobantes');
+
+-- 4. Crear política para que los usuarios (incluso sin login) puedan SUBIR comprobantes
+CREATE POLICY "Permitir subida a anon de comprobantes"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'comprobantes');
