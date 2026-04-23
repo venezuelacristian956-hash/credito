@@ -2731,34 +2731,85 @@ main {
   color: #0b4788;
 }
 
-/* Responsive */
+/* ─── RESPONSIVE HERO — igual a Crezcamos ─── */
 @media (max-width: 860px) {
+
+  /* Stacked: imagen arriba, texto abajo */
   .hero__flex {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
     min-height: auto;
   }
-  .hero__copy-g {
-    padding: 48px 0 24px;
-    text-align: center;
-  }
-  .hero__trust-g {
-    justify-content: center;
-  }
+
+  /* IMAGEN PRIMERO en mobile (order) */
   .hero__visual-g {
-    height: 340px;
+    order: -1;
+    height: 300px;
+    width: 100%;
+    border-radius: 0;
+    justify-content: center;
+    align-items: flex-end;
   }
-  .float-badge--1 { left: 8px; top: 20px; }
-  .float-badge--2 { right: 8px; top: 60px; }
-  .float-badge--3 { display: none; }
-  .float-badge--4 { display: none; }
-  .hero-amount-card {
-    flex-direction: column;
+
+  .hero__person-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 0;
+  }
+
+  /* Gradiente lateral no aplica en mobile */
+  .hero__visual-g::before {
+    display: none;
+  }
+
+  /* TEXTO debajo de la imagen */
+  .hero__copy-g {
+    order: 0;
+    padding: 28px 16px 36px;
     text-align: center;
-    padding: 20px;
-    margin: -20px 16px 0;
   }
+
+  .hero__title-g {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+  }
+
+  .hero__sub-g {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
   .btn-hero-g {
     width: 100%;
     justify-content: center;
+    font-size: 1rem;
+    padding: 15px 24px;
+  }
+
+  .hero__trust-g {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Badges en mobile: sólo 2 visibles */
+  .float-badge { font-size: 0.78rem; padding: 8px 12px; }
+  .float-badge--1 { top: 12px; left: 8px; }
+  .float-badge--2 { top: 12px; right: 8px; }
+  .float-badge--3 { display: none; }
+  .float-badge--4 { display: none; }
+
+  /* Tarjeta de montos */
+  .hero-amount-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    margin: -1px 0 0;
+    border-radius: 0 0 20px 20px;
+    max-width: 100%;
+    box-shadow: none;
+    border-top: 1px solid rgba(11,71,136,0.1);
   }
 }
+
