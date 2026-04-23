@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --brand-950: #072c56;
   --brand-900: #0b4788;
   --brand-800: #056a78;
@@ -1711,6 +1711,23 @@ main {
 
 /* 920px — tablet portrait / hamburger nav */
 @media (max-width: 920px) {
+  .header__inner {
+    justify-content: space-between;
+  }
+  .brand {
+    /* If the center element is wider/narrower than the outer elements, it won't be perfectly centered. Let's position it absolute to be safe */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nequi-logo {
+    display: block;
+  }
+  .nequi-logo img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
   .site-header {
     padding: 12px 0;
   }
@@ -2423,6 +2440,23 @@ main {
 }
 
 @media (max-width: 920px) {
+  .header__inner {
+    justify-content: space-between;
+  }
+  .brand {
+    /* If the center element is wider/narrower than the outer elements, it won't be perfectly centered. Let's position it absolute to be safe */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nequi-logo {
+    display: block;
+  }
+  .nequi-logo img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
   .hero__split {
     grid-template-columns: 1fr;
     gap: 32px;
