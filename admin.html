@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -240,8 +240,10 @@ function switchTab(tab, el) {
   el.classList.add('active');
   currentTab = tab;
   document.getElementById('btn-add-asesor').style.display = tab==='asesores'?'block':'none';
-  document.getElementById('filter-estado').style.display = tab==='asesores'?'none':'block';
-  document.getElementById('filter-asesor').style.display = tab==='asesores'?'none':'block';
+  const btnCuenta = document.getElementById('btn-add-cuenta');
+  if(btnCuenta) btnCuenta.style.display = tab==='cuentas'?'block':'none';
+  document.getElementById('filter-estado').style.display = (tab==='asesores' || tab==='cuentas')?'none':'block';
+  document.getElementById('filter-asesor').style.display = (tab==='asesores' || tab==='cuentas')?'none':'block';
   render();
 }
 
