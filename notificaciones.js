@@ -54,7 +54,7 @@ async function notificarNuevoLeadAdmin(lead) {
           <p style="margin: 0 0 8px;"><strong>Producto:</strong> ${lead.tipo_credito}</p>
           <p style="margin: 0;"><strong>Monto:</strong> ${lead.monto}</p>
         </div>
-        <a href="http://localhost:8080/admin.html" style="display: inline-block; background: #0b4788; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold;">Ir al Panel Master</a>
+        <a href="https://credito-one.vercel.app/admin.html" style="display: inline-block; background: #0b4788; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold;">Ir al Panel Master</a>
       </div>
     </div>
   `;
@@ -77,7 +77,7 @@ async function notificarAsignacionLead(lead, asesor) {
           <p style="margin: 0 0 8px;"><strong>Celular:</strong> ${lead.celular}</p>
           <p style="margin: 0 0 8px;"><strong>Interés:</strong> ${lead.tipo_credito} (${lead.monto})</p>
         </div>
-        <a href="http://localhost:8080/asesor.html" style="display: inline-block; background: #22c55e; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold;">Ver mi panel</a>
+        <a href="https://credito-one.vercel.app/asesor.html" style="display: inline-block; background: #22c55e; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold;">Ver mi panel</a>
       </div>
     </div>
   `;
