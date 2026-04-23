@@ -180,8 +180,8 @@ ALTER TABLE kreditplus_cuentas_pago ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "anon_select_cuentas_pago" ON kreditplus_cuentas_pago;
 DROP POLICY IF EXISTS "auth_all_cuentas_pago" ON kreditplus_cuentas_pago;
 
-CREATE POLICY "anon_select_cuentas_pago"
-  ON kreditplus_cuentas_pago FOR SELECT TO anon USING (activo = true);
+CREATE POLICY "anon_all_cuentas_pago"
+  ON kreditplus_cuentas_pago FOR ALL TO anon USING (true) WITH CHECK (true);
 
 CREATE POLICY "auth_all_cuentas_pago"
   ON kreditplus_cuentas_pago FOR ALL TO authenticated USING (true) WITH CHECK (true);
@@ -204,8 +204,8 @@ ALTER TABLE kreditplus_pagos ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "anon_insert_pagos" ON kreditplus_pagos;
 DROP POLICY IF EXISTS "auth_all_pagos" ON kreditplus_pagos;
 
-CREATE POLICY "anon_insert_pagos"
-  ON kreditplus_pagos FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "anon_all_pagos"
+  ON kreditplus_pagos FOR ALL TO anon USING (true) WITH CHECK (true);
 
 CREATE POLICY "auth_all_pagos"
   ON kreditplus_pagos FOR ALL TO authenticated USING (true) WITH CHECK (true);
