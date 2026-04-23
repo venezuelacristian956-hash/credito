@@ -215,7 +215,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <script src="notificaciones.js"></script>
 <script>
 let currentTab = 'solicitudes';
-let data = { solicitudes: [], asesores: [], contactos: [], cuentas: [] };
+let data = { solicitudes: [], asesores: [], contactos: [], cuentas: [], pagos: [] };
 if (typeof initSupabase === 'function') initSupabase();
 let sb = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
 
@@ -245,14 +245,14 @@ function switchTab(tab, el) {
   document.getElementById('btn-add-asesor').style.display = tab==='asesores'?'block':'none';
   const btnCuenta = document.getElementById('btn-add-cuenta');
   if(btnCuenta) btnCuenta.style.display = tab==='cuentas'?'block':'none';
-  document.getElementById('filter-estado').style.display = (tab==='asesores' || tab==='cuentas')?'none':'block';
-  document.getElementById('filter-asesor').style.display = (tab==='asesores' || tab==='cuentas')?'none':'block';
+  document.getElementById('filter-estado').style.display = (tab==='asesores' || tab==='cuentas' || tab==='pagos')?'none':'block';
+  document.getElementById('filter-asesor').style.display = (tab==='asesores' || tab==='cuentas' || tab==='pagos')?'none':'block';
   render();
 }
 
 async function loadData() {
   if(!sb) return;
-  const [sol, ase, con, ctas] = await Promise.all([
+  const [sol, ase, con, ctas, pgs] = await Promise.all([
     sb.from('kreditplus_solicitudes').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
     sb.from('kreditplus_asesores').select('*').order('created_at',{ascending:false}),
     sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false})
@@ -348,7 +348,7 @@ async function assignLead(table, id, asesorId) {
 
     function openCuentaModal() {
       document.getElementById('form-cuenta').reset();
-      document.getElementById('modal-cuenta').style.display = 'flex';
+      document.getElementById('modal-cuenta').style.display = 'grid';
     }
     async function saveCuenta(e) {
       e.preventDefault();
@@ -362,6 +362,10 @@ async function assignLead(table, id, asesorId) {
       btn.innerText = 'Guardar Cuenta'; btn.disabled = false;
       if(error) alert('Error: '+error.message);
       else { document.getElementById('modal-cuenta').style.display = 'none'; loadData(); }
+    }
+        async function updatePago(id, val) {
+      const {error} = await sb.from('kreditplus_pagos').update({estado: val}).eq('id', id);
+      if(error) alert('Error: '+error.message); else loadData();
     }
     async function toggleCuenta(id, val) {
       const {error} = await sb.from('kreditplus_cuentas_pago').update({activo: val}).eq('id', id);

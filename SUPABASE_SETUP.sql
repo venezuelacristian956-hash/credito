@@ -1,4 +1,4 @@
--- ═══════════════════════════════════════════════════════════════════
+﻿-- ═══════════════════════════════════════════════════════════════════
 -- KreditPlus — Setup Completo de Base de Datos v2
 -- Incluye: solicitudes, contactos, asesores, notas de seguimiento
 -- ═══════════════════════════════════════════════════════════════════
@@ -185,4 +185,31 @@ CREATE POLICY "anon_select_cuentas_pago"
 
 CREATE POLICY "auth_all_cuentas_pago"
   ON kreditplus_cuentas_pago FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+
+-- ═══════ TABLA: kreditplus_pagos (Comprobantes de pago) ═══════
+CREATE TABLE IF NOT EXISTS kreditplus_pagos (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  cedula text NOT NULL,
+  monto text NOT NULL,
+  cuenta_id text,
+  comprobante_url text NOT NULL,
+  estado text DEFAULT 'pendiente', -- pendiente, verificado, rechazado
+  created_at timestamp with time zone DEFAULT now()
+);
+
+-- Políticas RLS para pagos
+ALTER TABLE kreditplus_pagos ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "anon_insert_pagos" ON kreditplus_pagos;
+DROP POLICY IF EXISTS "auth_all_pagos" ON kreditplus_pagos;
+
+CREATE POLICY "anon_insert_pagos"
+  ON kreditplus_pagos FOR INSERT TO anon WITH CHECK (true);
+
+CREATE POLICY "auth_all_pagos"
+  ON kreditplus_pagos FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- IMPORTANTE: Para guardar imágenes, se debe crear un bucket en Storage llamado "comprobantes" 
+-- y darle permisos públicos (Public) y permitir INSERT a anon.
 

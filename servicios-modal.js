@@ -356,31 +356,113 @@ document.addEventListener('DOMContentLoaded', () => {
         let textMsg = `Hola, quiero pagar mi cuota y solicito confirmación de la cuenta: ${cta.banco} (${cta.tipo_cuenta}) - ${cta.numero_cuenta} a nombre de ${cta.titular}`;
         
         return `
-          <a href="https://wa.me/573245654320?text=${encodeURIComponent(textMsg)}" target="_blank"
-            style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:2px solid #e2f0fa;text-decoration:none;transition:all .2s;background:#f8fcff;">
-            
-            <div style="width:44px;height:44px;background:${bg};border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.6rem;color:${txt};text-align:center;line-height:1.2;flex-shrink:0;">
-              ${shortName}
+          <div style="display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:16px;border:2px solid #e2f0fa;background:#f8fcff;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:44px;height:44px;background:${bg};border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.6rem;color:${txt};text-align:center;line-height:1.2;flex-shrink:0;">
+                ${shortName}
+              </div>
+              <div style="overflow:hidden;">
+                <strong style="display:block;color:#0b4788;font-size:0.95rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${cta.banco}</strong>
+                <span style="color:#4d6788;font-size:0.8rem;display:block;">${cta.tipo_cuenta}: ${cta.numero_cuenta}</span>
+                <span style="color:#94a3b8;font-size:0.75rem;display:block;">${cta.titular}</span>
+              </div>
             </div>
-            
-            <div style="overflow:hidden;">
-              <strong style="display:block;color:#0b4788;font-size:0.95rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">Pagar con ${cta.banco}</strong>
-              <span style="color:#4d6788;font-size:0.8rem;display:block;">${cta.tipo_cuenta}: ${cta.numero_cuenta}</span>
-              <span style="color:#94a3b8;font-size:0.75rem;display:block;">${cta.titular}</span>
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              <button onclick="openReportarPago('${cta.id}', '${cta.banco}')" style="flex:1;background:#31cde4;color:#0b4788;border:none;padding:10px;border-radius:10px;font-weight:700;font-size:0.8rem;cursor:pointer;">Subir Comprobante</button>
+              <a href="https://wa.me/573245654320?text=${encodeURIComponent(textMsg)}" target="_blank" style="flex:1;background:#e8f7ff;color:#0b4788;border:1px solid #31cde4;padding:10px;border-radius:10px;font-weight:700;font-size:0.8rem;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;">Dudas a WhatsApp</a>
             </div>
-            
-            <span style="margin-left:auto;color:#31cde4;font-size:1.2rem;">&#8594;</span>
-          </a>
+          </div>
         `;
       }).join('');
 
-      container.innerHTML = items;
+      container.innerHTML = items + `
+        <div id="kpsm-reportar-container" style="display:none;margin-top:10px;padding-top:16px;border-top:1px solid #e0eaf5;">
+          <h3 style="margin:0 0 10px;font-size:1.1rem;color:#0b4788;">Reportar Pago a <span id="kpsm-rp-banco"></span></h3>
+          <form id="kpsm-form-reportar">
+            <input type="hidden" id="kpsm-rp-cuentaid">
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.8rem;color:#4d6788;margin-bottom:4px;">Cédula (la que usó en su crédito)</label>
+              <input type="text" id="kpsm-rp-cedula" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;outline:none;">
+            </div>
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.8rem;color:#4d6788;margin-bottom:4px;">Monto Pagado (Ej. 150000)</label>
+              <input type="number" id="kpsm-rp-monto" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;outline:none;">
+            </div>
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:0.8rem;color:#4d6788;margin-bottom:4px;">Foto o captura del comprobante</label>
+              <input type="file" id="kpsm-rp-file" accept="image/*" required style="width:100%;padding:10px;border:1px dashed #31cde4;border-radius:8px;background:#f0feff;outline:none;">
+            </div>
+            <button type="submit" id="kpsm-rp-btn" style="width:100%;background:#0b4788;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;font-size:0.95rem;cursor:pointer;">Enviar Comprobante</button>
+            <div id="kpsm-rp-msg" style="margin-top:10px;text-align:center;font-size:0.85rem;"></div>
+          </form>
+        </div>
+      `;
+
+      // Setup form submit
+      document.getElementById('kpsm-form-reportar').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('kpsm-rp-btn');
+        const msg = document.getElementById('kpsm-rp-msg');
+        btn.innerText = 'Subiendo...';
+        btn.disabled = true;
+        msg.innerHTML = '';
+        
+        try {
+          const cid = document.getElementById('kpsm-rp-cuentaid').value;
+          const cedula = document.getElementById('kpsm-rp-cedula').value;
+          const monto = document.getElementById('kpsm-rp-monto').value;
+          const fileInput = document.getElementById('kpsm-rp-file');
+          const file = fileInput.files[0];
+          
+          if (!file) throw new Error("Seleccione un comprobante");
+
+          // Upload to Supabase Storage
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+          const filePath = `${cedula}/${fileName}`;
+          
+          const { error: uploadError } = await sb.storage.from('comprobantes').upload(filePath, file);
+          if (uploadError) throw new Error("Error subiendo archivo. ¿Existe el bucket 'comprobantes' y tiene permisos públicos?");
+          
+          const { data: publicUrlData } = sb.storage.from('comprobantes').getPublicUrl(filePath);
+          const comprobanteUrl = publicUrlData.publicUrl;
+
+          // Insert into kreditplus_pagos
+          const { error: insertError } = await sb.from('kreditplus_pagos').insert([{
+            cedula, monto, comprobante_url: comprobanteUrl, cuenta_id: cid
+          }]);
+          
+          if (insertError) throw insertError;
+          
+          msg.innerHTML = '<span style="color:#15803d;font-weight:bold;">¡Comprobante enviado exitosamente!</span>';
+          document.getElementById('kpsm-form-reportar').reset();
+          setTimeout(() => {
+            document.getElementById('kpsm-reportar-container').style.display = 'none';
+          }, 3000);
+
+        } catch (err) {
+          console.error(err);
+          msg.innerHTML = `<span style="color:#b91c1c;">${err.message}</span>`;
+        } finally {
+          btn.innerText = 'Enviar Comprobante';
+          btn.disabled = false;
+        }
+      });
+
 
     } catch (err) {
       console.error(err);
       container.innerHTML = `<div class="kpsm-card kpsm-card--error"><p>Error al cargar las cuentas. Inténtalo más tarde.</p></div>`;
     }
   }
+
+  window.openReportarPago = function(id, banco) {
+    const c = document.getElementById('kpsm-reportar-container');
+    c.style.display = 'block';
+    document.getElementById('kpsm-rp-cuentaid').value = id;
+    document.getElementById('kpsm-rp-banco').innerText = banco;
+    c.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Interceptar la apertura de modal-pagar para cargar las cuentas dinámicas
   const originalOpenServiceModal = openServiceModal;
