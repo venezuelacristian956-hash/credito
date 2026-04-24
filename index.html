@@ -4432,21 +4432,35 @@
 .kpsm-servicios-section {
   position: relative !important;
   z-index: 5 !important;
-  background: #f0f4f8 !important;
+  background: #ffffff !important;
   margin-top: 0 !important;
   width: 100% !important;
 }
-
-/* Force Elementor white card section to stay within its bounds - prevent overlap with service buttons */
-.elementor-element-0dfd8ba {
-  max-height: none !important;
-  overflow: hidden !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+/* Hero card responsive */
+#kpsm-hero-card > div {
+  flex-direction: row !important;
 }
-/* If the Elementor card column has padding that extends below */
-.elementor-element-0dfd8ba .elementor-widget-wrap {
-  padding-bottom: 0 !important;
+@media (max-width: 680px) {
+  #kpsm-hero-card > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  #kpsm-hero-card > div > div:last-child {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  #kpsm-hero-card > div > div:last-child > div {
+    flex: 1 1 auto !important;
+    min-width: 120px !important;
+  }
+}
+
+/* OCULTAR seccion tarjeta Elementor (0dfd8ba) - reemplazada por tarjeta propia en codigo */
+.elementor-element-0dfd8ba,
+[data-id="0dfd8ba"] {
+  display: none !important;
 }
 </style>
 </head>
@@ -4700,7 +4714,69 @@
 									
 
 <!-- ═══ SECCIÓN SERVICIOS RÁPIDOS KREDITPLUS ═══ -->
-<section class="kpsm-servicios-section" style="width:100%;background:#f0f4f8;padding:48px 0 32px;margin:0;position:relative;z-index:5;">
+<!-- ═══ HERO CARD KREDITPLUS ═══ -->
+<section id="kpsm-hero-card" style="width:100%;background:linear-gradient(135deg,#062d57 0%,#0b4788 55%,#31cde4 100%);padding:0;margin:0;position:relative;overflow:hidden;">
+
+  <!-- Background decorative shapes -->
+  <div style="position:absolute;top:-80px;right:-60px;width:320px;height:320px;border-radius:50%;background:rgba(49,205,228,0.12);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-60px;left:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.05);pointer-events:none;"></div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:48px 24px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;z-index:2;">
+    
+    <!-- Left: texto principal -->
+    <div style="flex:1;min-width:260px;">
+      <p style="margin:0 0 8px;font-size:0.75rem;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:0.14em;text-transform:uppercase;">Préstamos rápidos en Colombia</p>
+      <h2 style="margin:0 0 6px;font-family:'Exo 2',sans-serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:#ffffff;line-height:1.2;">
+        Montos desde <span style="color:#31cde4;">$500 mil</span><br>hasta <span style="color:#31cde4;">$30 millones</span>
+      </h2>
+      <p style="margin:0 0 24px;font-size:0.88rem;color:rgba(255,255,255,0.65);">para tus préstamos rápidos &nbsp;·&nbsp; <em>*Aplican condiciones del producto</em></p>
+      
+      <!-- Badges -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:0.78rem;color:#fff;font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#31cde4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Sin codeudor
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:0.78rem;color:#fff;font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#31cde4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          100% Digital
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:0.78rem;color:#fff;font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#31cde4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Desembolso inmediato
+        </span>
+      </div>
+
+      <!-- CTA Button -->
+      <button data-modal-open id="kpsm-hero-cta"
+        style="display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:linear-gradient(135deg,#31cde4,#0b9abe);color:#062d57;font-weight:900;font-size:1rem;font-family:'Exo 2',sans-serif;border:none;border-radius:14px;cursor:pointer;box-shadow:0 8px 28px rgba(49,205,228,0.45);transition:transform 0.2s ease,box-shadow 0.2s ease;letter-spacing:0.02em;"
+        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 14px 36px rgba(49,205,228,0.6)'"
+        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 28px rgba(49,205,228,0.45)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        ¡Iniciar desembolso!
+      </button>
+    </div>
+
+    <!-- Right: mini stats / trust -->
+    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:12px;min-width:200px;">
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:16px 20px;backdrop-filter:blur(8px);">
+        <p style="margin:0;font-size:1.8rem;font-weight:900;color:#31cde4;font-family:'Exo 2',sans-serif;line-height:1;">0%</p>
+        <p style="margin:4px 0 0;font-size:0.8rem;color:rgba(255,255,255,0.7);">Comisión por asesoría</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:16px 20px;backdrop-filter:blur(8px);">
+        <p style="margin:0;font-size:1.8rem;font-weight:900;color:#31cde4;font-family:'Exo 2',sans-serif;line-height:1;">48h</p>
+        <p style="margin:4px 0 0;font-size:0.8rem;color:rgba(255,255,255,0.7);">Desembolso garantizado</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:16px 20px;backdrop-filter:blur(8px);">
+        <p style="margin:0;font-size:1.8rem;font-weight:900;color:#31cde4;font-family:'Exo 2',sans-serif;line-height:1;">36m</p>
+        <p style="margin:4px 0 0;font-size:0.8rem;color:rgba(255,255,255,0.7);">Plazo máximo de pago</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ═══ FIN HERO CARD ═══ -->
+<section class="kpsm-servicios-section" style="width:100%;background:#ffffff;padding:32px 0 28px;margin:0;position:relative;z-index:5;">
   <div style="max-width:760px;margin:0 auto;padding:0 20px;">
     <p style="text-align:center;font-size:0.78rem;font-weight:700;color:#31cde4;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Servicios rápidos</p>
     <div class="kpsm-servicios-wrap"><div class="kpsm-servicios-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
