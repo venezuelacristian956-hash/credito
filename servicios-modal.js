@@ -370,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }).join('');
 
       container.innerHTML = items;
+      container.style.display = 'flex';
 
       // Setup form submit global
       const formReportar = document.getElementById('kpsm-form-reportar');
@@ -436,12 +437,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 
-  // Interceptar la apertura de modal-pagar para cargar las cuentas dinámicas
+
+  // ─── BÚSQUEDA DE FACTURAS POR CÉDULA ───
+  window.buscarCuenta = async function() {
+    const cedInput = document.getElementById('kpsm-cedula-input');
+    const resultDiv = document.getElementById('kpsm-factura-result');
+    const pagosContainer = document.getElementById('kpsm-pagos-container');
+    const btn = document.getElementById('kpsm-cedula-btn');
+    
+    const cedula = cedInput ? cedInput.value.trim() : '';
+    if (!cedula) {
+      cedInput.style.borderColor = '#ef4444';
+      setTimeout(() => cedInput.style.borderColor = '#e2e8f0', 1500);
+      return;
+    }
+    
+    btn.innerText = 'Buscando...';
+    btn.disabled = true;
+    resultDiv.style.display = 'none';
+    pagosContainer.style.display = 'none';
+    
+    try {
+      if (!sb) throw new Error('Sin conexión');
+      
+      // Buscar facturas pendientes por cedula
+      const { data, error } = await sb.from('kreditplus_facturas')
+        .select('*')
+        .eq('cedula', cedula)
+        .in('estado', ['pendiente', 'vencido'])
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      
+      if (!data || data.length === 0) {
+        resultDiv.innerHTML = `
+          <div style="padding:18px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">✅</div>
+            <p style="margin:0;color:#15803d;font-weight:700;font-size:0.95rem;">¡Estás al día!</p>
+            <p style="margin:6px 0 0;color:#166534;font-size:0.83rem;">No encontramos cuotas pendientes para la cédula <strong>${cedula}</strong>.</p>
+          </div>`;
+        resultDiv.style.display = 'block';
+        return;
+      }
+      
+      const total = data.reduce((sum, f) => sum + parseFloat(f.monto), 0);
+      const items = data.map(f => {
+        const vencido = f.estado === 'vencido';
+        const fechaVenc = f.fecha_vencimiento ? new Date(f.fecha_vencimiento).toLocaleDateString('es-CO') : 'Sin vencimiento';
+        return `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:10px;background:${vencido?'#fff7ed':'#f8fcff'};border:1px solid ${vencido?'#fed7aa':'#e2f0fa'};margin-bottom:6px;">
+            <div>
+              <p style="margin:0;font-size:0.85rem;color:#1e293b;font-weight:600;">${f.descripcion}</p>
+              <p style="margin:2px 0 0;font-size:0.73rem;color:#94a3b8;">Vence: ${fechaVenc} &nbsp;·&nbsp; ${f.nombre_cliente}</p>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px;">
+              <p style="margin:0;font-size:0.95rem;font-weight:800;color:${vencido?'#ea580c':'#0b4788'};">$${parseFloat(f.monto).toLocaleString('es-CO')}</p>
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px;background:${vencido?'#fed7aa':'#dbeafe'};color:${vencido?'#9a3412':'#1e40af'};">${vencido?'VENCIDO':'PENDIENTE'}</span>
+            </div>
+          </div>`;
+      }).join('');
+      
+      resultDiv.innerHTML = `
+        <div style="padding:16px;background:#fff;border:1px solid #e2f0fa;border-radius:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">
+            <div>
+              <p style="margin:0;font-size:0.75rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;font-weight:700;">Cédula ${cedula}</p>
+              <p style="margin:2px 0 0;font-size:1rem;font-weight:800;color:#0b4788;">${data[0].nombre_cliente}</p>
+            </div>
+            <div style="text-align:right;">
+              <p style="margin:0;font-size:0.72rem;color:#94a3b8;">Total a pagar</p>
+              <p style="margin:0;font-size:1.3rem;font-weight:900;color:#0b4788;">$${total.toLocaleString('es-CO')}</p>
+            </div>
+          </div>
+          ${items}
+        </div>`;
+      resultDiv.style.display = 'block';
+      
+      // Mostrar cuentas de pago debajo
+      await loadCuentasPago();
+      
+    } catch(err) {
+      console.error(err);
+      resultDiv.innerHTML = `<div style="padding:14px;background:#fee2e2;border-radius:12px;text-align:center;font-size:0.85rem;color:#b91c1c;">${err.message}</div>`;
+      resultDiv.style.display = 'block';
+    } finally {
+      btn.innerText = 'Consultar';
+      btn.disabled = false;
+    }
+  };
+  
+  // Enter key en cédula
+  document.addEventListener('DOMContentLoaded', () => {
+    const ci = document.getElementById('kpsm-cedula-input');
+    if (ci) ci.addEventListener('keydown', (e) => { if (e.key === 'Enter') window.buscarCuenta(); });
+  });
+
+    // Interceptar la apertura de modal-pagar
   const originalOpenServiceModal = openServiceModal;
   openServiceModal = function(modalId) {
     originalOpenServiceModal(modalId);
     if (modalId === 'modal-pagar') {
-      loadCuentasPago();
+      // Resetear busqueda
+      const ci = document.getElementById('kpsm-cedula-input');
+      const rd = document.getElementById('kpsm-factura-result');
+      const pc = document.getElementById('kpsm-pagos-container');
+      if (ci) ci.value = '';
+      if (rd) { rd.style.display = 'none'; rd.innerHTML = ''; }
+      if (pc) { pc.style.display = 'none'; pc.innerHTML = ''; }
     }
   };
 }); // end DOMContentLoaded

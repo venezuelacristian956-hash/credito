@@ -233,3 +233,26 @@ USING (bucket_id = 'comprobantes');
 CREATE POLICY "Permitir subida a anon de comprobantes"
 ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'comprobantes');
+
+-- ═══════ TABLA: kreditplus_facturas ═══════
+CREATE TABLE IF NOT EXISTS kreditplus_facturas (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  cedula text NOT NULL,
+  nombre_cliente text NOT NULL,
+  descripcion text NOT NULL,
+  monto numeric NOT NULL,
+  estado text DEFAULT 'pendiente',  -- pendiente, pagado, vencido
+  fecha_vencimiento date,
+  created_at timestamp with time zone DEFAULT now()
+);
+
+ALTER TABLE kreditplus_facturas ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "anon_all_facturas" ON kreditplus_facturas;
+DROP POLICY IF EXISTS "auth_all_facturas" ON kreditplus_facturas;
+
+CREATE POLICY "anon_all_facturas"
+  ON kreditplus_facturas FOR ALL TO anon USING (true) WITH CHECK (true);
+
+CREATE POLICY "auth_all_facturas"
+  ON kreditplus_facturas FOR ALL TO authenticated USING (true) WITH CHECK (true);

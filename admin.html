@@ -125,6 +125,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
       <button class="tab" onclick="switchTab('contactos', this)">💬 Contactos</button>
       <button class="tab" onclick="switchTab('cuentas', this)">🏦 Cuentas de Pago</button>
       <button class="tab" onclick="switchTab('pagos', this)">💰 Reportes de Pago</button>
+      <button class="tab" onclick="switchTab('facturas', this)">🧾 Facturas</button>
     </div>
 
     <div class="toolbar">
@@ -142,6 +143,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
       </select>
       <button class="btn-primary" id="btn-add-asesor" style="display:none" onclick="openAsesorModal()">+ Nuevo Asesor</button>
       <button class="btn-primary" id="btn-add-cuenta" style="display:none" onclick="openCuentaModal()">+ Nueva Cuenta</button>
+      <button class="btn-primary" id="btn-add-factura" style="display:none" onclick="openFacturaModal()">+ Nueva Factura</button>
     </div>
 
     <div class="table-wrap" id="table-wrap"></div>
@@ -216,7 +218,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <script src="notificaciones.js"></script>
 <script>
 let currentTab = 'solicitudes';
-let data = { solicitudes: [], asesores: [], contactos: [], cuentas: [], pagos: [] };
+let data = { solicitudes: [], asesores: [], contactos: [], cuentas: [], pagos: [], facturas: [] };
 if (typeof initSupabase === 'function') initSupabase();
 let sb = typeof supabaseClient !== 'undefined' ? supabaseClient : null;
 
@@ -246,25 +248,30 @@ function switchTab(tab, el) {
   document.getElementById('btn-add-asesor').style.display = tab==='asesores'?'block':'none';
   const btnCuenta = document.getElementById('btn-add-cuenta');
   if(btnCuenta) btnCuenta.style.display = tab==='cuentas'?'block':'none';
-  document.getElementById('filter-estado').style.display = (tab==='asesores' || tab==='cuentas' || tab==='pagos')?'none':'block';
-  document.getElementById('filter-asesor').style.display = (tab==='asesores' || tab==='cuentas' || tab==='pagos')?'none':'block';
+  const btnFactura = document.getElementById('btn-add-factura');
+  if(btnFactura) btnFactura.style.display = tab==='facturas'?'block':'none';
+  const noFilters = ['asesores','cuentas','pagos','facturas'];
+  document.getElementById('filter-estado').style.display = noFilters.includes(tab)?'none':'block';
+  document.getElementById('filter-asesor').style.display = noFilters.includes(tab)?'none':'block';
   render();
 }
 
 async function loadData() {
   if(!sb) return;
-  const [sol, ase, con, ctas, pgs] = await Promise.all([
+  const [sol, ase, con, ctas, pgs, fcts] = await Promise.all([
     sb.from('kreditplus_solicitudes').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
     sb.from('kreditplus_asesores').select('*').order('created_at',{ascending:false}),
     sb.from('kreditplus_contactos').select('*, asesor:kreditplus_asesores(nombre)').order('created_at',{ascending:false}),
     sb.from('kreditplus_cuentas_pago').select('*').order('created_at',{ascending:false}),
-    sb.from('kreditplus_pagos').select('*').order('created_at',{ascending:false})
+    sb.from('kreditplus_pagos').select('*').order('created_at',{ascending:false}),
+    sb.from('kreditplus_facturas').select('*').order('created_at',{ascending:false})
   ]);
   data.solicitudes = sol.data || [];
   data.asesores = ase.data || [];
   data.contactos = con.data || [];
   data.cuentas = ctas.data || [];
   data.pagos = pgs.data || [];
+  data.facturas = fcts.data || [];
   
   // Populate filter
   const sel = document.getElementById('filter-asesor');
@@ -377,7 +384,28 @@ function render() {
         </td>
       </tr>`).join('')}</tbody></table>`;
   }
+  else if (currentTab === 'facturas') {
+    wrap.innerHTML = `<table>
+      <thead><tr><th>Fecha</th><th>Cliente</th><th>Cédula</th><th>Descripción</th><th>Monto</th><th>Vence</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>${list.map(r=>`<tr>
+        <td style="color:var(--ink-soft)">${new Date(r.created_at).toLocaleDateString()}</td>
+        <td><strong>${r.nombre_cliente}</strong></td>
+        <td style="color:var(--ink-soft)">${r.cedula}</td>
+        <td>${r.descripcion}</td>
+        <td style="font-weight:700;color:#31cde4">$ ${parseFloat(r.monto).toLocaleString('es-CO')}</td>
+        <td style="color:var(--ink-soft)">${r.fecha_vencimiento ? new Date(r.fecha_vencimiento).toLocaleDateString('es-CO') : '—'}</td>
+        <td><span class="badge badge-${r.estado==='pagado'?'aprobado':r.estado==='vencido'?'rechazado':'nuevo'}">${r.estado}</span></td>
+        <td style="display:flex;gap:6px;flex-wrap:wrap;">
+          ${r.estado === 'pendiente' ? `
+            <button class="btn-outline" style="border-color:#15803d;color:#15803d;padding:4px 8px;font-size:0.72rem;" onclick="updateFactura('${r.id}','pagado')">✔ Pagado</button>
+            <button class="btn-outline" style="border-color:#f59e0b;color:#f59e0b;padding:4px 8px;font-size:0.72rem;" onclick="updateFactura('${r.id}','vencido')">⚠ Vencido</button>
+          ` : ''}
+          <button class="btn-outline" style="border-color:#ef4444;color:#ef4444;padding:4px 8px;font-size:0.72rem;" onclick="deleteFactura('${r.id}')">🗑</button>
+        </td>
+      </tr>`).join('')}</tbody></table>`;
+  }
 }
+
 
 async function assignLead(table, id, asesorId) {
   if(!sb) return;
@@ -422,7 +450,40 @@ async function assignLead(table, id, asesorId) {
     }
 
     function openAsesorModal() { document.getElementById('modal-asesor').style.display='grid'; }
+    function openFacturaModal() {
+      document.getElementById('form-factura').reset();
+      document.getElementById('modal-factura').style.display='grid';
+    }
 function closeModal(id) { document.getElementById(id).style.display='none'; }
+
+async function saveFactura(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btn-save-factura');
+  btn.innerText = 'Guardando...'; btn.disabled = true;
+  const payload = {
+    cedula: document.getElementById('fct-cedula').value,
+    nombre_cliente: document.getElementById('fct-nombre').value,
+    descripcion: document.getElementById('fct-descripcion').value,
+    monto: parseFloat(document.getElementById('fct-monto').value),
+    fecha_vencimiento: document.getElementById('fct-vence').value || null
+  };
+  const {error} = await sb.from('kreditplus_facturas').insert([payload]);
+  btn.innerText = 'Guardar Factura'; btn.disabled = false;
+  if(error) alert('Error: ' + error.message);
+  else { closeModal('modal-factura'); loadData(); }
+}
+
+async function updateFactura(id, val) {
+  const {error} = await sb.from('kreditplus_facturas').update({estado: val}).eq('id', id);
+  if(error) alert('Error: '+error.message); else loadData();
+}
+
+async function deleteFactura(id) {
+  if(!confirm('¿Eliminar esta factura?')) return;
+  const {error} = await sb.from('kreditplus_facturas').delete().eq('id', id);
+  if(error) alert('Error: '+error.message); else loadData();
+}
+
 
 async function saveAsesor() {
   if(!sb) { alert("Error: Conexión a base de datos no configurada."); return; }
@@ -459,5 +520,46 @@ async function saveAsesor() {
   loadData();
 }
 </script>
+
+<!-- Modal Nueva Factura -->
+<div class="modal-backdrop" id="modal-factura">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-header">
+      <div class="modal-title">🧾 Nueva Factura de Cobro</div>
+      <button class="modal-close" onclick="closeModal('modal-factura')">×</button>
+    </div>
+    <form id="form-factura" onsubmit="saveFactura(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-group">
+          <label>Cédula del Cliente *</label>
+          <input type="text" id="fct-cedula" class="form-input" placeholder="1075294576" required>
+        </div>
+        <div class="form-group">
+          <label>Nombre Completo *</label>
+          <input type="text" id="fct-nombre" class="form-input" placeholder="Juan Pérez" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Descripción / Concepto *</label>
+        <input type="text" id="fct-descripcion" class="form-input" placeholder="Ej. Cuota #2 Crédito Personal $2M" required>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-group">
+          <label>Monto a Cobrar ($) *</label>
+          <input type="number" id="fct-monto" class="form-input" placeholder="150000" min="0" step="1000" required>
+        </div>
+        <div class="form-group">
+          <label>Fecha de Vencimiento</label>
+          <input type="date" id="fct-vence" class="form-input">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <button type="button" class="btn-outline" onclick="closeModal('modal-factura')">Cancelar</button>
+        <button type="submit" class="btn-primary" style="width:100%" id="btn-save-factura">Guardar Factura</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>
