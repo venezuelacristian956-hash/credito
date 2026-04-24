@@ -4408,18 +4408,13 @@
 /* === SECCION GRIS: ocultar completamente === */
 .elementor-element-533b61e,
 [data-id="533b61e"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  min-height: 0 !important;
-  padding: 0 !important;
+  display: none !important;
 }
-.elementor-element-533b61e > .elementor-container { display: none !important; }
 
-/* === SECCION BEIGE/CAFE: ocultar fondo === */
+/* === SECCION BEIGE/CAFE: ocultar completamente === */
 .elementor-element-d5f0dc2,
 [data-id="d5f0dc2"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  display: none !important;
 }
 
 /* === EVITAR QUE LA TARJETA BLANCA (0dfd8ba) SOBREPONGA LOS BOTONES === */
@@ -4436,9 +4431,10 @@
 /* === NUESTROS BOTONES: siempre encima y con su propio espacio === */
 .kpsm-servicios-section {
   position: relative !important;
-  z-index: 10 !important;
-  background: #ffffff !important;
+  z-index: 5 !important;
+  background: #f0f4f8 !important;
   margin-top: 0 !important;
+  width: 100% !important;
 }
 
 /* Force Elementor white card section to stay within its bounds - prevent overlap with service buttons */
@@ -4704,7 +4700,7 @@
 									
 
 <!-- ═══ SECCIÓN SERVICIOS RÁPIDOS KREDITPLUS ═══ -->
-<section class="kpsm-servicios-section" style="width:100%;background:#ffffff;padding:32px 0 24px;margin:0;position:relative;z-index:10;box-shadow:0 -8px 24px rgba(0,0,0,0.08);clear:both;">
+<section class="kpsm-servicios-section" style="width:100%;background:#f0f4f8;padding:48px 0 32px;margin:0;position:relative;z-index:5;">
   <div style="max-width:760px;margin:0 auto;padding:0 20px;">
     <p style="text-align:center;font-size:0.78rem;font-weight:700;color:#31cde4;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Servicios rápidos</p>
     <div class="kpsm-servicios-wrap"><div class="kpsm-servicios-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
