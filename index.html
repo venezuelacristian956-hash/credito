@@ -4404,23 +4404,53 @@
 
 <style>
 /* ═══ FIX KREDITPLUS: Eliminar secciones de Elementor con fondos indeseados ═══ */
-/* Seccion gris (data-id: 533b61e) */
-.elementor-element-533b61e {
+
+/* === SECCION GRIS: ocultar completamente === */
+.elementor-element-533b61e,
+[data-id="533b61e"] {
+  background: #ffffff !important;
   background-color: #ffffff !important;
   min-height: 0 !important;
+  padding: 0 !important;
 }
-/* Seccion beige/cafe (data-id: d5f0dc2 - "prestamos faciles?") */
-.elementor-element-d5f0dc2 {
+.elementor-element-533b61e > .elementor-container { display: none !important; }
+
+/* === SECCION BEIGE/CAFE: ocultar fondo === */
+.elementor-element-d5f0dc2,
+[data-id="d5f0dc2"] {
+  background: #ffffff !important;
   background-color: #ffffff !important;
 }
-/* Asegurar que nuestra seccion de servicios y la cinta queden por encima */
-section[style*="background:#ffffff"] {
-  position: relative;
-  z-index: 5;
+
+/* === EVITAR QUE LA TARJETA BLANCA (0dfd8ba) SOBREPONGA LOS BOTONES === */
+.elementor-element-0dfd8ba {
+  overflow: visible !important;
+  z-index: 1 !important;
+  position: relative !important;
 }
-div[style*="background:linear-gradient(90deg,#062d57"] {
-  position: relative;
-  z-index: 5;
+/* La tarjeta blanca tipo card que está dentro - no debe salir del contenedor */
+.elementor-element-0dfd8ba .elementor-column-gap-default > .elementor-column {
+  overflow: visible !important;
+}
+
+/* === NUESTROS BOTONES: siempre encima y con su propio espacio === */
+.kpsm-servicios-section {
+  position: relative !important;
+  z-index: 10 !important;
+  background: #ffffff !important;
+  margin-top: 0 !important;
+}
+
+/* Force Elementor white card section to stay within its bounds - prevent overlap with service buttons */
+.elementor-element-0dfd8ba {
+  max-height: none !important;
+  overflow: hidden !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* If the Elementor card column has padding that extends below */
+.elementor-element-0dfd8ba .elementor-widget-wrap {
+  padding-bottom: 0 !important;
 }
 </style>
 </head>
@@ -4674,7 +4704,7 @@ div[style*="background:linear-gradient(90deg,#062d57"] {
 									
 
 <!-- ═══ SECCIÓN SERVICIOS RÁPIDOS KREDITPLUS ═══ -->
-<section style="width:100%;background:#ffffff;padding:32px 0 24px;margin:0;position:relative;z-index:2;box-shadow:0 -4px 20px rgba(0,0,0,0.06);">
+<section class="kpsm-servicios-section" style="width:100%;background:#ffffff;padding:32px 0 24px;margin:0;position:relative;z-index:10;box-shadow:0 -8px 24px rgba(0,0,0,0.08);clear:both;">
   <div style="max-width:760px;margin:0 auto;padding:0 20px;">
     <p style="text-align:center;font-size:0.78rem;font-weight:700;color:#31cde4;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Servicios rápidos</p>
     <div class="kpsm-servicios-wrap"><div class="kpsm-servicios-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
