@@ -4828,20 +4828,6 @@ div[style*="background:linear-gradient(90deg,#062d57"] {
 </style>
 
 <style>
-/* Fix: Ocultar la seccion gris/cafe de Elementor que aparece debajo de la cinta de avales */
-.elementor-section:has(.elementor-container) + .elementor-section[data-element_type="section"]:not([data-kpsm]) {
-  display: none !important;
-}
-/* Fix global: forzar fondo blanco en body principal hasta nuestra seccion */
-.elementor-location-single .elementor-section.elementor-top-section:first-of-type ~ .elementor-section {
-  position: relative;
-  z-index: 1;
-}
-/* Cubrir la seccion gris "prestamos faciles?" del tema base */
-#kpsm-services-section + * .elementor-section:not(:first-child) {
-  background: #fff !important;
-}
-</style>
 [data-service-modal]:hover {
   transform: translateY(-4px) !important;
   box-shadow: 0 10px 30px rgba(49,205,228,0.2) !important;
